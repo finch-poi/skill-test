@@ -1,43 +1,43 @@
-# Project: skill-test
+# 项目：skill-test
 
-## Tech Stack
+## 技术栈
 
-- **Framework**: Vue 3.6 (beta/vapor) + TypeScript
-- **Build Tool**: Vite 8 (beta)
-- **State Management**: Pinia 3
-- **Router**: Vue Router 5
-- **Package Manager**: pnpm (with workspace overrides for Vue beta)
-- **Testing**: Vitest + @vue/test-utils
-- **Linting**: ESLint + oxlint + eslint-plugin-vue
-- **Formatting**: oxfmt
-- **Type Checking**: vue-tsc
+- **框架**：Vue 3.6 (beta/vapor) + TypeScript
+- **构建工具**：Vite 8 (beta)
+- **状态管理**：Pinia 3
+- **路由**：Vue Router 5
+- **包管理器**：pnpm（通过 workspace overrides 使用 Vue beta）
+- **测试**：Vitest + @vue/test-utils
+- **代码检查**：ESLint + oxlint + eslint-plugin-vue
+- **代码格式化**：oxfmt
+- **类型检查**：vue-tsc
 
-## Development Commands
+## 开发命令
 
 ```bash
-pnpm dev          # Start dev server
-pnpm build        # Type check + build
-pnpm build-only   # Build without type check
-pnpm type-check   # Run vue-tsc type checking
-pnpm test:unit    # Run unit tests with Vitest
-pnpm lint         # Run oxlint + eslint with auto-fix
-pnpm format       # Format src/ with oxfmt
-pnpm preview      # Preview production build
+pnpm dev          # 启动开发服务器
+pnpm build        # 类型检查 + 构建
+pnpm build-only   # 仅构建（不做类型检查）
+pnpm type-check   # 运行 vue-tsc 类型检查
+pnpm test:unit    # 使用 Vitest 运行单元测试
+pnpm lint         # 运行 oxlint + eslint 并自动修复
+pnpm format       # 使用 oxfmt 格式化 src/
+pnpm preview      # 预览生产构建
 ```
 
-## Code Conventions
+## 代码规范
 
-- Use Vue 3 Composition API with `<script setup lang="ts">` for all components
-- Use TypeScript strict mode
-- Path alias: `@` maps to `./src`
-- Store files go in `src/stores/` using Pinia's `defineStore` with composition function style
-- Route definitions in `src/router/index.ts`
-- Unit tests in `src/__tests__/` with `.spec.ts` suffix
+- 所有组件使用 Vue 3 Composition API 配合 `<script setup lang="ts">`
+- 使用 TypeScript strict 模式
+- 路径别名：`@` 映射到 `./src`
+- Store 文件放在 `src/stores/`，使用 Pinia 的 `defineStore` 组合函数风格
+- 路由定义在 `src/router/index.ts`
+- 单元测试放在 `src/__tests__/`，文件后缀为 `.spec.ts`
 
 ## Skills
 
-This project includes the following Claude Code skills in `../opendesign-skills`:
+本项目在 `../opendesign-skills` 中包含以下 Claude Code skills：
 
-- **opendesign-components**: OpenDesign Vue component library usage guide and API references
-- **opendesign-tokens**: Design token system with theme-specific token references
-- **openeuler-frontend-tools**: openEuler frontend utility functions, composables, and mixins
+- **opendesign-components**：OpenDesign Vue 组件库使用指南及 API 参考
+- **opendesign-tokens**：设计令牌系统及主题相关令牌参考
+- **openeuler-frontend-tools**：openEuler 前端工具函数、composables 及 mixins
