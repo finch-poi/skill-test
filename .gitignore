@@ -26,6 +26,9 @@ coverage
 
 *.tsbuildinfo
 
+# Generated icon components
+src/icon-components
+
 .eslintcache
 
 # Cypress

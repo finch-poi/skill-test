@@ -41,3 +41,7 @@ pnpm preview      # 预览生产构建
 - **opendesign-components**：OpenDesign Vue 组件库使用指南及 API 参考
 - **opendesign-tokens**：设计令牌系统及主题相关令牌参考
 - **openeuler-frontend-tools**：openEuler 前端工具函数、composables 及 mixins
+
+### 注意
+- 你每次调用skill之前，应该判断skill基于上次调用有没有更新
+- 若有更新，则判断更新对于本次调用任务有无帮助，若有帮助应该应用新的skill
