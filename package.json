@@ -18,13 +18,13 @@
   },
   "dependencies": {
     "@opensig/opendesign": "^1.2.1",
-    "@opensig/opendesign-token": "^0.0.9",
+    "@opensig/opendesign-token": "^0.0.10",
     "pinia": "^3.0.4",
     "vue": "^3.5.29",
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
-    "@opensig/open-scripts": "^1.0.4",
+    "@opensig/open-scripts": "1.0.6",
     "@tsconfig/node24": "^24.0.4",
     "@types/jsdom": "^28.0.0",
     "@types/node": "^24.11.0",

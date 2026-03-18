@@ -27,8 +27,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1(@vueuse/core@10.11.1(vue@3.6.0-beta.8(typescript@5.9.3)))(vue@3.6.0-beta.8(typescript@5.9.3))
       '@opensig/opendesign-token':
-        specifier: ^0.0.9
-        version: 0.0.9
+        specifier: ^0.0.10
+        version: 0.0.10
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@5.9.3)(vue@3.6.0-beta.8(typescript@5.9.3))
@@ -40,8 +40,8 @@ importers:
         version: 5.0.3(pinia@3.0.4(typescript@5.9.3)(vue@3.6.0-beta.8(typescript@5.9.3)))(vue@3.6.0-beta.8(typescript@5.9.3))
     devDependencies:
       '@opensig/open-scripts':
-        specifier: ^1.0.4
-        version: 1.0.4(@types/node@24.12.0)(typescript@5.9.3)(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))
+        specifier: 1.0.6
+        version: 1.0.6(@rollup/plugin-terser@0.4.4)(@vitejs/plugin-vue@6.0.5(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))(vue@3.6.0-beta.8(typescript@5.9.3)))(clean-css@5.3.3)(commander@13.1.0)(glob@11.1.0)(globals@16.5.0)(jiti@2.6.1)(sass-embedded@1.85.1)(svgo@3.3.3)(vite-plugin-dts@4.5.4(@types/node@24.12.0)(typescript@5.9.3)(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2)))(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))
       '@tsconfig/node24':
         specifier: ^24.0.4
         version: 24.0.4
@@ -432,12 +432,24 @@ packages:
   '@one-ini/wasm@0.1.1':
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
 
-  '@opensig/open-scripts@1.0.4':
-    resolution: {integrity: sha512-vIfq7pt37eYV5mugAkeopFur0vrKBXXbJ3xepckEDUC/EOH20f1JbJQyweztdkDV88vbZ0LMTmppUdYt8IWK6Q==}
+  '@opensig/open-scripts@1.0.6':
+    resolution: {integrity: sha512-tVXx9NAQpDumeW5FdHlkGrr1cH+TA50qeDY+A9Htejp+nne0TKxYxQqyKuhoUcONgg/OUFVVJHtnhdYYcmAT5w==}
     hasBin: true
+    peerDependencies:
+      '@rollup/plugin-terser': ^0.4.4
+      '@vitejs/plugin-vue': ^6.0.3
+      clean-css: ^5.3.3
+      commander: ^13.1.0
+      glob: ^11.0.1
+      globals: ^16.5.0
+      jiti: 2.6.1
+      sass-embedded: 1.85.1
+      svgo: ^3.3.2
+      vite: 6.3.5
+      vite-plugin-dts: ^4.5.3
 
-  '@opensig/opendesign-token@0.0.9':
-    resolution: {integrity: sha512-dYSiDZpL9ZD02d5PQlmLNmslZZ/CuHENFjoIhI1f3RlvJEkTEyp5y7GP1HQtIKXxeWfM9izc9x79YIC797iGHg==}
+  '@opensig/opendesign-token@0.0.10':
+    resolution: {integrity: sha512-8yGeK+6LLQlBn2ZFz4DFTql3BDY94LhNjvRc8xjLL27O0C0Vfdo2hAYhXnnJyffhZTgRC30vyEaCfsBxatwqow==}
 
   '@opensig/opendesign@1.2.1':
     resolution: {integrity: sha512-kxux3FwFK6v3+jpbyG4VC1guYlw4KElF/tzK7RkkMs15cRpw3SJKONZuRmg/3qHlYlf/23qLPonXpIRDb58HDw==}
@@ -1652,6 +1664,10 @@ packages:
     resolution: {integrity: sha512-vuNwKSaKiqm7g0THUBu2x7ckSs3XJLXE+2ssL7/MfTGPLLcrJQ/4Uq1CjPTtO5cCIiRxqvN6Twy1qOwhL0Xjcw==}
     engines: {node: 20 || >=22}
     hasBin: true
+
+  globals@16.5.0:
+    resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
+    engines: {node: '>=18'}
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
@@ -3208,26 +3224,21 @@ snapshots:
 
   '@one-ini/wasm@0.1.1': {}
 
-  '@opensig/open-scripts@1.0.4(@types/node@24.12.0)(typescript@5.9.3)(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))':
+  '@opensig/open-scripts@1.0.6(@rollup/plugin-terser@0.4.4)(@vitejs/plugin-vue@6.0.5(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))(vue@3.6.0-beta.8(typescript@5.9.3)))(clean-css@5.3.3)(commander@13.1.0)(glob@11.1.0)(globals@16.5.0)(jiti@2.6.1)(sass-embedded@1.85.1)(svgo@3.3.3)(vite-plugin-dts@4.5.4(@types/node@24.12.0)(typescript@5.9.3)(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2)))(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))':
     dependencies:
       '@rollup/plugin-terser': 0.4.4
       '@vitejs/plugin-vue': 6.0.5(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))(vue@3.6.0-beta.8(typescript@5.9.3))
       clean-css: 5.3.3
       commander: 13.1.0
-      fs-extra: 11.3.4
       glob: 11.1.0
+      globals: 16.5.0
+      jiti: 2.6.1
       sass-embedded: 1.85.1
       svgo: 3.3.3
+      vite: 8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2)
       vite-plugin-dts: 4.5.4(@types/node@24.12.0)(typescript@5.9.3)(vite@8.0.0-beta.18(@types/node@24.12.0)(jiti@2.6.1)(sass-embedded@1.85.1)(terser@5.46.1)(yaml@2.8.2))
-      vue: 3.6.0-beta.8(typescript@5.9.3)
-    transitivePeerDependencies:
-      - '@types/node'
-      - rollup
-      - supports-color
-      - typescript
-      - vite
 
-  '@opensig/opendesign-token@0.0.9': {}
+  '@opensig/opendesign-token@0.0.10': {}
 
   '@opensig/opendesign@1.2.1(@vueuse/core@10.11.1(vue@3.6.0-beta.8(typescript@5.9.3)))(vue@3.6.0-beta.8(typescript@5.9.3))':
     dependencies:
@@ -4375,6 +4386,8 @@ snapshots:
       minipass: 7.1.3
       package-json-from-dist: 1.0.1
       path-scurry: 2.0.2
+
+  globals@16.5.0: {}
 
   graceful-fs@4.2.11: {}
 
