@@ -43,3 +43,9 @@ pnpm preview      # 预览生产构建
 - **openeuler-frontend-tools**：openEuler 前端工具函数、composables 及 mixins
 
 开发中组件和变量应优先使用opendesign设计系统相关的内容
+
+## 改进Skill
+
+本项目是一个测试项目，旨在通过还原设计图来找出opendesign生态skill中存在的问题，所以在发现代码实现与设计图存在差别时，
+你应该找到为什么会存在这个差别，然后看应该如何优化opendesign生态的skill(可编辑对应文件)，优化skill后应用最新的skill修复该问题
+
