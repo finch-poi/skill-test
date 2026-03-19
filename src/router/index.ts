@@ -13,6 +13,11 @@ const router = createRouter({
       name: 'software-detail',
       component: () => import('@/views/SoftwareDetailView.vue'),
     },
+    {
+      path: '/policy-rules',
+      name: 'policy-rules',
+      component: () => import('@/views/PolicyRulesView.vue'),
+    },
   ],
 })
 

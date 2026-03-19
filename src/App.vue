@@ -53,3 +53,9 @@ import { isGlobalLoading } from '@/composables/useGlobalLoading'
   opacity: 0;
 }
 </style>
+
+<style>
+body {
+  background-color: var(--o-color-fill1);
+}
+</style>
