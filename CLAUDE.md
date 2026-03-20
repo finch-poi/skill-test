@@ -33,6 +33,23 @@ pnpm preview      # 预览生产构建
 - Store 文件放在 `src/stores/`，使用 Pinia 的 `defineStore` 组合函数风格
 - 路由定义在 `src/router/index.ts`
 - 单元测试放在 `src/__tests__/`，文件后缀为 `.spec.ts`
+- 应合理的拆分组件，优先使用opendesign生态内容
+
+## 公共代码维护规则
+
+**凡修改以下"公共/共享"文件，必须同步更新 MEMORY.md 中的「公共代码索引」部分**：
+
+| 目录/文件 | 维护内容 |
+|-----------|---------|
+| `src/components/` | 组件名、props、用法示例 |
+| `src/composables/` | 函数签名、返回值、使用示例 |
+| `src/api/request.ts` | 接口签名、BASE_URL、参数说明 |
+| `src/icon-components/` | 图标组件清单 |
+| `src/router/index.ts` | 路由表（路径 → 视图名） |
+| `src/main.ts` | 全局初始化逻辑 |
+| `src/App.vue` | 根组件结构 |
+
+> 具体页面文件（`src/views/`）无需维护到公共索引，仅在 MEMORY.md「已实现页面」列表中更新路由条目即可。
 
 ## Skills
 
@@ -48,4 +65,36 @@ pnpm preview      # 预览生产构建
 
 本项目是一个测试项目，旨在通过还原设计图来找出opendesign生态skill中存在的问题，所以在发现代码实现与设计图存在差别时，
 你应该找到为什么会存在这个差别，然后看应该如何优化opendesign生态的skill(可编辑对应文件)，优化skill后应用最新的skill修复该问题
+
+## 设计图还原标准工作流
+
+收到"还原设计图"任务时，**必须**遵循 `docs/pixso-tdd-workflow.md` 中定义的完整流程：
+
+1. 用 Pixso MCP 读取设计稿（`mcp__pixso__get_image` + `mcp__pixso__get_node_dsl`）
+2. 识别组件 → 读取对应 Skill 文件（`../opendesign-skills/skills/opendesign-components/references/`）
+3. 先生成 Playwright 测试（Red ❌）
+4. 再实现页面代码
+5. 运行测试 → 按 Level 0/1/2 分析失败原因 → 修复 Skill 和/或代码
+6. 循环直到全部通过（Green ✅）
+
+测试必须覆盖 8 个维度（详见工作流文件）：
+1. 结构与组件正确性
+2. 默认状态正确性
+3. 布局与间距
+4. 视觉样式（字号/颜色/圆角/行高/边框/阴影）
+5. 交互行为（点击/hover）
+6. 相对位置关系（元素上下左右顺序、对齐方式）
+7. 非组件内部间距使用响应式 CSS 变量（不硬编码 px）
+8. 块的对齐（同级元素顶部/底部/居中对齐，等分宽度）
+
+**⚠️ 重要**：所有还原度检测测试必须将浏览器视口设置为与设计稿断点一致的宽度（从 Pixso DSL 的画板宽度推断）。在 `beforeEach` 中调用 `page.setViewportSize()`，确保响应式布局、字号、间距等属性的断言值与设计稿所在断点匹配。
+
+详细规范、Playwright 测试写法规范、已知 DOM class 知识库见：`docs/pixso-tdd-workflow.md`
+
+### Playwright 运行命令
+
+```bash
+# 使用系统 Chrome（无需下载浏览器）
+npx playwright test e2e/{file}.spec.ts --project="Google Chrome" --reporter=line
+```
 

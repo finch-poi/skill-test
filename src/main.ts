@@ -7,7 +7,6 @@ import router from './router'
 import '@opensig/opendesign/es/index.css'
 import '@opensig/opendesign-token/themes/e.light.token.css'
 import '@opensig/opendesign-token/themes/e.dark.token.css'
-import './styles/form-controls.scss'
 
 document.documentElement.setAttribute('data-o-theme', 'e.light')
 
