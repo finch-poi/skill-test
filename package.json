@@ -18,7 +18,7 @@
     "gen:icon": "open-scripts gen:icon --config ./icons/icon.config.ts"
   },
   "dependencies": {
-    "@opensig/opendesign": "C:\\Users\\Administrator\\Documents\\Repo\\opendesign-components\\packages\\opendesign",
+    "@opensig/opendesign": "link:C:\\Users\\Administrator\\Documents\\Repo\\opendesign-components\\packages\\opendesign",
     "@opensig/opendesign-token": "^0.0.10",
     "pinia": "^3.0.4",
     "vue": "^3.5.29",

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@opensig/opendesign':
-        specifier: C:\Users\Administrator\Documents\Repo\opendesign-components\packages\opendesign
-        version: link:../../Documents/Repo/opendesign-components/packages/opendesign
+        specifier: link:C:\Users\Administrator\Documents\Repo\opendesign-components\packages\opendesign
+        version: link:../opendesign-components/packages/opendesign
       '@opensig/opendesign-token':
         specifier: ^0.0.10
         version: 0.0.10
