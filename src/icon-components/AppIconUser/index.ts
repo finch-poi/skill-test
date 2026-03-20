@@ -1,0 +1,1 @@
+export { default as AppIconUser } from './AppIconUser.vue';

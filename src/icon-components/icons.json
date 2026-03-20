@@ -1,0 +1,50 @@
+[
+  {
+    "type": "fill",
+    "name": "app-icon-version-filter",
+    "componentName": "AppIconVersionFilter",
+    "path": "fill/version-filter.svg"
+  },
+  {
+    "type": "fill",
+    "name": "app-icon-user",
+    "componentName": "AppIconUser",
+    "path": "fill/user.svg"
+  },
+  {
+    "type": "fill",
+    "name": "app-icon-moon",
+    "componentName": "AppIconMoon",
+    "path": "fill/moon.svg"
+  },
+  {
+    "type": "fill",
+    "name": "app-icon-mail",
+    "componentName": "AppIconMail",
+    "path": "fill/mail.svg"
+  },
+  {
+    "type": "fill",
+    "name": "app-icon-gitee",
+    "componentName": "AppIconGitee",
+    "path": "fill/gitee.svg"
+  },
+  {
+    "type": "fill",
+    "name": "app-icon-domain-filter",
+    "componentName": "AppIconDomainFilter",
+    "path": "fill/domain-filter.svg"
+  },
+  {
+    "type": "fill",
+    "name": "app-icon-copy",
+    "componentName": "AppIconCopy",
+    "path": "fill/copy.svg"
+  },
+  {
+    "type": "fill",
+    "name": "app-icon-arch-filter",
+    "componentName": "AppIconArchFilter",
+    "path": "fill/arch-filter.svg"
+  }
+]

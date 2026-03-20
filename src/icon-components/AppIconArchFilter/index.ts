@@ -1,0 +1,1 @@
+export { default as AppIconArchFilter } from './AppIconArchFilter.vue';

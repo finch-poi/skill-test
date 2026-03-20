@@ -26,9 +26,6 @@ coverage
 
 *.tsbuildinfo
 
-# Generated icon components
-src/icon-components
-
 .eslintcache
 
 # Cypress
@@ -40,3 +37,6 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+test-results/
+playwright-report/

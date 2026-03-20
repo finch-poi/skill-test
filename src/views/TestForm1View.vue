@@ -237,6 +237,7 @@ const selectedKeys = ref<number[]>([1])
               :columns="tableColumns"
               :data="tableData"
               row-key="id"
+              selection
             />
           </section>
 

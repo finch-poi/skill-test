@@ -1,0 +1,1 @@
+export { default as AppIconMoon } from './AppIconMoon.vue';

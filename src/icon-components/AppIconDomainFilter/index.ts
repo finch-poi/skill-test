@@ -1,0 +1,1 @@
+export { default as AppIconDomainFilter } from './AppIconDomainFilter.vue';

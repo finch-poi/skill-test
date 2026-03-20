@@ -1,0 +1,1 @@
+export { default as AppIconCopy } from './AppIconCopy.vue';

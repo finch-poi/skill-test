@@ -1,0 +1,1 @@
+export { default as AppIconMail } from './AppIconMail.vue';
