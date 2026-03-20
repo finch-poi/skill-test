@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'policy-rules',
       component: () => import('@/views/PolicyRulesView.vue'),
     },
+    {
+      path: '/test-form1',
+      name: 'test-form1',
+      component: () => import('@/views/TestForm1View.vue'),
+    },
   ],
 })
 
