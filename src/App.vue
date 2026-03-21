@@ -7,12 +7,12 @@ import { isGlobalLoading } from '@/composables/useGlobalLoading'
   <RouterView />
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 
 </style>
 
-<style>
+<style lang="scss">
 body {
   background-color: var(--o-color-fill1);
 }

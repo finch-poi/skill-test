@@ -17,4 +17,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+@use "@/assets/style/mixin/screen.scss" as *;
+@use "@/assets/style/mixin/font.scss" as *;
+@use "@/assets/style/mixin/common.scss" as *;
+`,
+      },
+    },
+  },
 })

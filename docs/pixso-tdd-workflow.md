@@ -54,6 +54,9 @@ mcp__pixso__get_node_dsl(itemId)
 - 每个区域用到的 opendesign 组件
 - 布局方式（grid / flex / 堆叠）
 - 视觉规格：颜色、字号、行高、间距、圆角、边框、阴影（从 DSL 提取精确数值）
+- **主要块的宽度**：从 DSL `frame.width` 对照 Token Skill 第3节「grid-N 像素对照表」确定用 `--o-r-grid-N`
+- **边框/描边**：记录每个主要块的 DSL `strokes`，**strokes 为空时不加任何 border**
+- **可滚动区域**：识别高度受限且内容可能超出的区域，标记为"需要 overflow 处理"
 
 ### ⛔ Step 1 必须产出设计值提取表，否则禁止进入 Step 3
 
@@ -602,6 +605,99 @@ src/
 import { OButton, OCard, OPagination, ... } from '@opensig/opendesign'
 ```
 
+**⚠️ 样式语言：默认使用 SCSS**
+
+所有 Vue 组件 `<style>` 标签必须加 `lang="scss"`，优先使用 SCSS mixins 处理响应式断点：
+
+```vue
+<style lang="scss" scoped>
+@use '~@/assets/style/mixin/screen.scss' as *;
+@use '~@/assets/style/mixin/font.scss' as *;
+
+.container {
+  padding: var(--o-r-gap-6);
+
+  @include respond-to('pad') {
+    padding: var(--o-r-gap-4);
+  }
+
+  @include respond-to('phone') {
+    padding: var(--o-r-gap-3);
+  }
+}
+</style>
+```
+
+> 如果项目尚未创建 mixin 文件，在 `src/assets/style/mixin/` 目录下参考 `openeuler-frontend-tools` skill 的 mixins.md 创建 `screen.scss`、`font.scss`、`common.scss`。如项目没有 SCSS 支持，用媒体查询代替 mixin，但断点值必须与 Token skill 保持一致（840px / 1200px / 1680px）。
+
+**⚠️ 页面主要块必须使用栅格系统**
+
+页面顶层容器使用 `.o-r-grid-container`，各主要块（侧边栏、主内容区、多列区块）宽度使用 `--o-r-grid-N`：
+
+```vue
+<!-- 外层容器 -->
+<div class="page-wrapper o-r-grid-container">
+  <aside class="sidebar" />    <!-- width: var(--o-r-grid-6) -->
+  <main class="content" />     <!-- width: var(--o-r-grid-18) -->
+</div>
+```
+
+```css
+.sidebar {
+  width: var(--o-r-grid-6);
+  margin-right: var(--o-r-grid-column-gutter);
+  flex-shrink: 0;
+}
+.content {
+  flex: 1;
+  min-width: 0;
+}
+```
+
+从 Pixso DSL 读到 frame 宽度时，用 Token Skill 第 3 节「Pixso 画板 → grid-N 像素对照表」确定 N。
+
+**⚠️ 边框规则：只在 DSL 有 strokes 时才加**
+
+```
+如果 DSL node.strokes 为空数组 [] 或不存在 → 不加任何 border
+如果 DSL node.strokes 有值 → 加对应 border，颜色用 --o-color-control1（默认描边）
+如果 DSL node.effects 有 INNER_SHADOW → 用 box-shadow: inset ... 代替边框
+```
+
+```css
+/* ✅ DSL strokes 有值时 */
+border: 1px solid var(--o-color-control1);
+
+/* ❌ 不要给所有卡片/容器默认加边框 —— 只按设计稿来 */
+```
+
+**⚠️ 可滚动区域：使用 OScroller 组件或 overflow 处理**
+
+识别以下场景时，必须处理溢出滚动：
+- 高度固定的侧边栏（`height: calc(100vh - Npx)`）
+- 嵌套内容区域超出父容器
+- 长列表、数据表格
+
+```vue
+<!-- 方案1：使用 OScroller 组件（推荐） -->
+<OScroller height="calc(100vh - 56px)">
+  <div class="sidebar-content">...</div>
+</OScroller>
+
+<!-- 方案2：原生 overflow + SCSS scrollbar mixin -->
+<aside class="sidebar">...</aside>
+```
+
+```css
+/* SCSS 方案 */
+.sidebar {
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+
+  @include scrollbar; /* 来自 common.scss mixin */
+}
+```
+
 **视觉 Token 使用原则**：
 - 颜色优先使用 CSS 变量（如 `var(--o-color-primary1)`）而非硬编码
 - 间距**始终使用 `var(--o-r-gap-N)`**（响应式），除非明确说明需要固定间距才用 `--o-gap-N`
@@ -784,3 +880,37 @@ N ≥ 3 且内容可变？
 2. **补充 DOM class 名**（组件源码中 `:class` 的实际值）
 3. **验证方式**：查看 `opendesign-components` 中对应组件的 `.vue` 源码
 4. 所有修改要**有源码依据**（注明来自哪个文件哪行）
+
+---
+
+## Step 6：经验固化（必须执行）
+
+**每次发现 Skill 不准确或工作流有漏洞时，必须在当场更新对应文件，而不仅仅写入本机 MEMORY.md。**
+
+> **原因**：MEMORY.md 只存在于当前机器的 `.claude` 目录，其他开发者或新会话无法访问。经验必须固化到版本控制的文件中，才能让所有人受益，防止问题重复发生。
+
+### 经验固化优先级
+
+| 发现的问题类型 | 必须更新的文件 | 可选更新 |
+|--------------|-------------|---------|
+| Token 名称不存在 / 错误 | `opendesign-skills/skills/opendesign-tokens/SKILL.md` | MEMORY.md |
+| 组件 prop / class 不准确 | `opendesign-skills/skills/opendesign-components/references/{name}.md` | MEMORY.md |
+| 工作流步骤缺失 / 不完整 | `docs/pixso-tdd-workflow.md`（本文件） | MEMORY.md |
+| 项目级约定（路由/全局CSS/mixin路径） | `CLAUDE.md` | MEMORY.md |
+| 已知 DOM class 积累 | `docs/pixso-tdd-workflow.md` 的「已知 DOM class 知识库」 | MEMORY.md |
+
+### 经验固化触发时机
+
+- 测试失败 + 根因是 Skill 内容错误 → **立即修改 Skill，再修代码**
+- 测试通过但发现代码用了不存在的 CSS 变量 → **立即在 Token Skill 加禁止使用警告**
+- 发现工作流中某个步骤的描述不足导致了实现偏差 → **立即在工作流中补充规则**
+- 修复了一个 Skill 错误后，检查同类问题是否还有遗漏 → **批量修复**
+
+### 经验固化检查清单
+
+完成每个页面还原后，在提交前检查：
+
+- [ ] 本次实现发现了哪些 Skill 不准确之处？已更新对应 md 文件？
+- [ ] 本次 TDD 流程有哪些步骤执行困难？已在工作流文件中补充说明？
+- [ ] 新发现的 DOM class / 组件行为已更新到「已知 DOM class 知识库」？
+- [ ] MEMORY.md 中已记录的经验与本次发现有无矛盾？如有矛盾，MEMORY.md 需要更新

@@ -1,0 +1,58 @@
+// 响应式字体 mixin — 使用 opendesign --o-r-font_size-* 变量
+// 通过 CSS 变量实现，无需重复写媒体查询
+// 注意：字号和行高本身已经是响应式的（由 responsive.token.css 的媒体查询控制）
+
+@mixin display1 {
+  font-size: var(--o-r-font_size-display1);
+  line-height: var(--o-r-line_height-display1);
+}
+
+@mixin display2 {
+  font-size: var(--o-r-font_size-display2);
+  line-height: var(--o-r-line_height-display2);
+}
+
+@mixin display3 {
+  font-size: var(--o-r-font_size-display3);
+  line-height: var(--o-r-line_height-display3);
+}
+
+@mixin h1 {
+  font-size: var(--o-r-font_size-h1);
+  line-height: var(--o-r-line_height-h1);
+}
+
+@mixin h2 {
+  font-size: var(--o-r-font_size-h2);
+  line-height: var(--o-r-line_height-h2);
+}
+
+@mixin h3 {
+  font-size: var(--o-r-font_size-h3);
+  line-height: var(--o-r-line_height-h3);
+}
+
+@mixin h4 {
+  font-size: var(--o-r-font_size-h4);
+  line-height: var(--o-r-line_height-h4);
+}
+
+@mixin text2 {
+  font-size: var(--o-r-font_size-text2);
+  line-height: var(--o-r-line_height-text2);
+}
+
+@mixin text1 {
+  font-size: var(--o-r-font_size-text1);
+  line-height: var(--o-r-line_height-text1);
+}
+
+@mixin tip1 {
+  font-size: var(--o-r-font_size-tip1);
+  line-height: var(--o-r-line_height-tip1);
+}
+
+@mixin tip2 {
+  font-size: var(--o-r-font_size-tip2);
+  line-height: var(--o-r-line_height-tip2);
+}

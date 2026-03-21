@@ -35,6 +35,39 @@ pnpm preview      # 预览生产构建
 - 单元测试放在 `src/__tests__/`，文件后缀为 `.spec.ts`
 - 应合理的拆分组件，优先使用opendesign生态内容
 
+### 样式规范
+
+- **所有 `<style>` 标签必须加 `lang="scss"`**，不允许裸 CSS
+- Mixin 已通过 `vite.config.ts` 的 `css.preprocessorOptions.scss.additionalData` 全局注入，**各 `.vue` 文件中直接使用 `@include`，禁止手动 `@use` mixin 文件**
+- 响应式断点统一使用 `@include respond-to(...)` mixin，文件路径 `src/assets/style/mixin/screen.scss`
+- 字号响应式使用 `@include h1` / `@include text1` 等 font mixin，文件路径 `src/assets/style/mixin/font.scss`
+- 如 mixin 文件尚未创建，参考 `../opendesign-skills/skills/openeuler-frontend-tools/references/mixins.md` 创建
+
+### 布局规范
+
+- 页面顶层内容区使用 `.o-r-grid-container` 类，主要块宽度使用 `--o-r-grid-N` 变量
+- 布局时参考 `https://www.hiascend.com/` 各屏幕断点下的表现作为视觉参考标准
+- 需要响应式多列布局时，优先使用 `ORow` + `OCol` 组件（见 grid.md Skill）
+
+### CSS Token 强制约定
+
+- **背景色**：页面背景 `--o-color-fill1`，卡片/区块白色背景 `--o-color-fill2`，嵌套背景 `--o-color-fill3`
+- **⛔ 严禁使用** `--o-color-bg1`、`--o-color-bg2`（不存在，解析为 transparent）
+- **⛔ 严禁使用** `--o-r-radius-1`（不存在，圆角变量是 `--o-radius-xs/s/m/l/xl`）
+- **边框**：只有当 DSL `strokes` 非空时才写 `border`，**不要给卡片/容器默认加边框**
+- 可滚动的固定高度区域必须设置 `overflow-y: auto`，推荐使用 OScroller 组件或 `@include scrollbar` mixin
+
+### 经验固化规范
+
+发现 Skill 问题或工作流漏洞时，**必须同时更新以下位置**，不能只更新 MEMORY.md：
+
+| 问题类型 | 必须更新的文件 |
+|---------|-------------|
+| Token 名称不存在 / 错误 | `../opendesign-skills/skills/opendesign-tokens/SKILL.md` |
+| 组件 prop / DOM class 不准确 | `../opendesign-skills/skills/opendesign-components/references/{name}.md` |
+| 工作流步骤缺失 / 规则不完整 | `docs/pixso-tdd-workflow.md` |
+| 项目级约定（路由/全局CSS/工具路径） | 本文件（`CLAUDE.md`） |
+
 ## 公共代码维护规则
 
 **凡修改以下"公共/共享"文件，必须同步更新 MEMORY.md 中的「公共代码索引」部分**：
@@ -65,6 +98,7 @@ pnpm preview      # 预览生产构建
 
 本项目是一个测试项目，旨在通过还原设计图来找出opendesign生态skill中存在的问题，所以在发现代码实现与设计图存在差别时，
 你应该找到为什么会存在这个差别，然后看应该如何优化opendesign生态的skill(可编辑对应文件)，优化skill后应用最新的skill修复该问题
+不管是修改skill还是修改本项目的工作流，你的**究极目的是要像素级还原页面，保证之前犯过的错误不会再发生**，不然**世界上就会有好多小动物死掉**
 
 ## 设计图还原标准工作流
 

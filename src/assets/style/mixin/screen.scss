@@ -1,0 +1,36 @@
+// 响应式断点 mixin — 与 opendesign token 体系断点保持一致
+// Phone   : ≤600px
+// pad_v   : 601–840px
+// pad_h   : 841–1200px
+// laptop  : 1201–1440px
+// desktop : >1440px（默认，无需 mixin）
+//
+// ⚠️ map 值必须用引号包裹（字符串），否则 SCSS 会把括号解析为 list 导致编译错误
+
+$breakpoints: (
+  'phone':        '(max-width: 600px)',
+  '>phone':       '(min-width: 601px)',
+  'pad_v':        '(min-width: 601px) and (max-width: 840px)',
+  '<=pad_v':      '(max-width: 840px)',
+  '>pad_v':       '(min-width: 841px)',
+  'pad_h':        '(min-width: 841px) and (max-width: 1200px)',
+  'pad':          '(min-width: 601px) and (max-width: 1200px)',
+  '<=pad':        '(max-width: 1200px)',
+  '>pad':         '(min-width: 1201px)',
+  'laptop':       '(min-width: 1201px) and (max-width: 1440px)',
+  '<=laptop':     '(max-width: 1440px)',
+  '>laptop':      '(min-width: 1441px)',
+  'pad-laptop':   '(min-width: 601px) and (max-width: 1440px)',
+  'pad_v-laptop': '(min-width: 841px) and (max-width: 1440px)',
+);
+
+@mixin respond-to($bp) {
+  $query: map-get($breakpoints, $bp);
+  @if $query == null {
+    @warn "Unknown breakpoint: #{$bp}";
+  } @else {
+    @media #{$query} {
+      @content;
+    }
+  }
+}
