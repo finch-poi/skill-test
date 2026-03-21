@@ -53,7 +53,7 @@ const footerColumns = [
   </footer>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .app-footer {
   background: #1a1a2e;
   color: #ccc;
@@ -118,7 +118,7 @@ const footerColumns = [
 }
 
 .footer-bottom {
-  border-top: 1px solid #333;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding: var(--o-r-gap-4) var(--o-r-gap-7);
   text-align: center;
   font-size: var(--o-r-font_size-tip2);

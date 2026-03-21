@@ -17,6 +17,7 @@ import {
 } from '@opensig/opendesign'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import AppSection from '@/components/AppSection.vue'
 import { getPolicyList, type PolicyCard } from '@/api/policy'
 
 // ─── Banner 轮播数据 ───
@@ -116,16 +117,14 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
     >
       <OCarouselItem v-for="slide in bannerSlides" :key="slide.id">
         <div class="banner-slide" :style="{ background: slide.gradient }">
-          <div class="banner-inner">
-            <div class="banner-content">
-              <h1 class="banner-title">{{ slide.title }}</h1>
-              <p class="banner-desc">{{ slide.desc }}</p>
-              <OButton color="primary" variant="solid" round="pill" class="banner-btn">
-                {{ slide.btnText }}
-              </OButton>
-            </div>
-            <div class="banner-illustration" aria-hidden="true" />
+          <div class="banner-content">
+            <h1 class="banner-title">{{ slide.title }}</h1>
+            <p class="banner-desc">{{ slide.desc }}</p>
+            <OButton color="primary" variant="solid" round="pill" class="banner-btn">
+              {{ slide.btnText }}
+            </OButton>
           </div>
+          <div class="banner-illustration" aria-hidden="true" />
         </div>
       </OCarouselItem>
     </OCarousel>
@@ -143,7 +142,8 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
     </div>
 
     <!-- 主内容 -->
-    <main class="main-content">
+    <AppSection class="policy-main-section">
+      <template #main>
       <!-- 筛选面板 -->
       <div class="filter-panel">
         <!-- 分类 -->
@@ -220,13 +220,14 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
           :page-sizes="[20, 40, 60]"
         />
       </div>
-    </main>
+      </template>
+    </AppSection>
 
     <AppFooter />
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .page-policy-rules {
   min-height: 100vh;
   display: flex;
@@ -249,17 +250,13 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
 .banner-slide {
   height: 100%;
   overflow: hidden;
-}
-
-.banner-inner {
-  height: 100%;
-  max-width: 1488px;
-  margin: 0 auto;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--o-r-gap-9);
+  padding: 0 var(--o-r-grid-padding);
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 .banner-content {
@@ -295,12 +292,14 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
 }
 
 /* ─── 主内容 ─── */
-.main-content {
+.policy-main-section {
   flex: 1;
-  max-width: 1488px;
-  width: 100%;
-  margin: 0 auto;
-  padding: var(--o-r-gap-7) 0 var(--o-r-gap-7);
+
+  :deep(.section-wrapper) {
+    margin-top: 0;
+    padding-top: var(--o-r-gap-7);
+    padding-bottom: var(--o-r-gap-7);
+  }
 }
 
 /* ─── 筛选面板 ─── */
