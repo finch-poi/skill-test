@@ -45,9 +45,35 @@ pnpm preview      # 预览生产构建
 
 ### 布局规范
 
-- 页面顶层内容区使用 `.o-r-grid-container` 类，主要块宽度使用 `--o-r-grid-N` 变量
+#### 页面布局模式判断（优先级最高）
+
+拿到页面设计稿后，**首先判断布局模式**，选择对应方案：
+
+| 布局特征 | 典型形态 | 实现方案 |
+|---------|---------|---------|
+| **纵向楼层堆叠**：页面从上到下由一个或多个独立区块组成，每个区块占满宽度，内容居中 | 首页、落地页、内容列表页 | 每个楼层用 `<AppSection>` 包裹，视图层只做 flex-column 容器 |
+| **横向分栏**：页面有固定宽度的左侧导航/目录列，右侧为随内容伸展的主体区域 | 文档页、设置页、详情页 | 用 `--o-r-grid-N` 栅格 token 指定左栏宽度（如 `width: var(--o-r-grid-4)`），右栏 `flex: 1; min-width: 0` |
+
+#### AppSection 使用规则
+
+- **楼层型页面**中，每个楼层使用 `<AppSection>` 包裹，无需在视图层设置额外宽度
+- 有标题/副标题的楼层：传 `title` / `subtitle` prop，内容放 default slot（自动加 `margin-top: gap-7`）
+- 无标题、只需响应式居中的区域：用 `#main` 插槽完全接管内部内容
+- 需要覆盖内部间距时，在楼层组件 scoped 样式里用 `:deep(.section-wrapper) { margin-top: 0; padding-top: ... }`
+- 有背景色的楼层：在楼层组件 scoped 样式加 `background` + `:deep(.section-wrapper) { padding-bottom: var(--o-r-gap-10) }`
+
+#### 横向分栏规则
+
+- 左栏宽度用 `--o-r-grid-N`（N 为设计稿对应的栅格列数），随断点自动收窄
+- 右栏用 `flex: 1; min-width: 0`，**禁止加 `max-width`**，否则背景色会从右侧漏出
+- 整个分栏区域用 `.o-r-grid-container` 包一层提供响应式侧边距，再在内部做 flex-row
+- **⛔ 禁止**在 flex-row 的某一列内再嵌套 `.o-r-grid-container`：`width: 100vw` 会超出父列宽度造成溢出
+
+#### 通用规则
+
+- `.o-r-grid-container` 实际定义：`display:flex; width:100vw; max-width:1920px; margin:0 auto; padding:0 var(--o-r-grid-padding)`
 - 布局时参考 `https://www.hiascend.com/` 各屏幕断点下的表现作为视觉参考标准
-- 需要响应式多列布局时，优先使用 `ORow` + `OCol` 组件（见 grid.md Skill）
+- 需要响应式多列卡片布局时，优先使用 `ORow` + `OCol` 组件（见 grid.md Skill）
 
 ### CSS Token 强制约定
 
@@ -101,6 +127,8 @@ pnpm preview      # 预览生产构建
 不管是修改skill还是修改本项目的工作流，你的**究极目的是要像素级还原页面，保证之前犯过的错误不会再发生**，不然**世界上就会有好多小动物死掉**
 
 ## 设计图还原标准工作流
+
+收到"还原设计图"任务时，**先查 `docs/design-map.md`**，用 Pixso item-id 反查已有的代码文件和 e2e 目录。若是新页面则在完成后更新该文件。
 
 收到"还原设计图"任务时，**必须**遵循 `docs/pixso-tdd-workflow.md` 中定义的完整流程：
 

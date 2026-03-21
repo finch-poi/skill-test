@@ -13,7 +13,4 @@ import { isGlobalLoading } from '@/composables/useGlobalLoading'
 </style>
 
 <style lang="scss">
-body {
-  background-color: var(--o-color-fill1);
-}
 </style>

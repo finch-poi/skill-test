@@ -8,6 +8,8 @@
 
 用户提供 Pixso 页面链接或 item-id（如 `item-id=2:30326`），要求还原页面。
 
+**收到任务后第一步**：查 `docs/design-map.md`，用 item-id 反查对应的代码文件路径和 e2e 目录，避免重复创建已有的文件。
+
 ---
 
 ## 完整流程
@@ -630,31 +632,52 @@ import { OButton, OCard, OPagination, ... } from '@opensig/opendesign'
 
 > 如果项目尚未创建 mixin 文件，在 `src/assets/style/mixin/` 目录下参考 `openeuler-frontend-tools` skill 的 mixins.md 创建 `screen.scss`、`font.scss`、`common.scss`。如项目没有 SCSS 支持，用媒体查询代替 mixin，但断点值必须与 Token skill 保持一致（840px / 1200px / 1680px）。
 
-**⚠️ 页面主要块必须使用栅格系统**
+**⚠️ 页面布局规范：先判断布局模式，再选对应方案**
 
-页面顶层容器使用 `.o-r-grid-container`，各主要块（侧边栏、主内容区、多列区块）宽度使用 `--o-r-grid-N`：
+拿到设计稿后首先判断布局类型：
+
+| 布局特征 | 典型形态 | 实现方案 |
+|---------|---------|---------|
+| **纵向楼层堆叠**：页面由一个或多个占满宽度的区块从上到下堆叠，各区块内容居中 | 首页、落地页、列表页 | 每个楼层用 `<AppSection>` 包裹，视图层只做 flex-column 容器 |
+| **横向分栏**：页面有固定宽度的左侧导航/目录列，右侧为随内容伸展的主体区域 | 详情页、设置页、阅读页 | 整体用 `.o-r-grid-container` 包一层，内部 flex-row；左栏 `width: var(--o-r-grid-N)`，右栏 `flex: 1; min-width: 0` |
+
+#### 楼层堆叠型——使用 AppSection
 
 ```vue
-<!-- 外层容器 -->
-<div class="page-wrapper o-r-grid-container">
-  <aside class="sidebar" />    <!-- width: var(--o-r-grid-6) -->
-  <main class="content" />     <!-- width: var(--o-r-grid-18) -->
+<!-- ✅ 正确：每个楼层用 AppSection，视图层只做容器 -->
+<div class="page">
+  <AppHeader />
+  <FloorBanner />        <!-- 内部用 AppSection #main 插槽 -->
+  <FloorContent />       <!-- 内部用 <AppSection title="..."> -->
+  <AppFooter />
 </div>
 ```
 
-```css
-.sidebar {
-  width: var(--o-r-grid-6);
-  margin-right: var(--o-r-grid-column-gutter);
-  flex-shrink: 0;
-}
-.content {
-  flex: 1;
-  min-width: 0;
-}
+AppSection 关键规则：
+- 有标题的楼层：传 `title` prop，内容放 default slot（自动 `margin-top: gap-7`）
+- 无标题只需居中的区域：用 `#main` 插槽，覆盖 `:deep(.section-wrapper) { margin-top: 0; padding-top: ... }`
+- 有背景色的楼层：在楼层 scoped 样式加 `background` + `:deep(.section-wrapper) { padding-bottom: var(--o-r-gap-10) }`
+
+#### 横向分栏型——使用栅格 token
+
+```vue
+<!-- ✅ 正确：.o-r-grid-container 包一层，内部 flex-row -->
+<div class="page-body o-r-grid-container">
+  <aside class="sidebar">...</aside>
+  <main class="main-content">...</main>
+</div>
 ```
 
-从 Pixso DSL 读到 frame 宽度时，用 Token Skill 第 3 节「Pixso 画板 → grid-N 像素对照表」确定 N。
+```scss
+.page-body { gap: var(--o-r-gap-6); }
+.sidebar   { width: var(--o-r-grid-4); flex-shrink: 0; }  // 对应设计稿列数
+.main-content { flex: 1; min-width: 0; }  // ⛔ 禁止加 max-width
+```
+
+**关键规则**：
+- **⛔ 禁止**在 flex-row 的某一列内嵌套 `.o-r-grid-container`（`width: 100vw` 会溢出）
+- 右侧主体区 **禁止加 `max-width`**，否则背景色从右侧漏出
+- `.o-r-grid-container` 实际定义：`display:flex; width:100vw; max-width:1920px; margin:0 auto; padding:0 var(--o-r-grid-padding)`
 
 **⚠️ 边框规则：只在 DSL 有 strokes 时才加**
 
@@ -898,6 +921,7 @@ N ≥ 3 且内容可变？
 | 工作流步骤缺失 / 不完整 | `docs/pixso-tdd-workflow.md`（本文件） | MEMORY.md |
 | 项目级约定（路由/全局CSS/mixin路径） | `CLAUDE.md` | MEMORY.md |
 | 已知 DOM class 积累 | `docs/pixso-tdd-workflow.md` 的「已知 DOM class 知识库」 | MEMORY.md |
+| 新增/修改页面 | `docs/design-map.md`（设计图 ID ↔ 代码文件映射） | MEMORY.md |
 
 ### 经验固化触发时机
 
@@ -914,3 +938,4 @@ N ≥ 3 且内容可变？
 - [ ] 本次 TDD 流程有哪些步骤执行困难？已在工作流文件中补充说明？
 - [ ] 新发现的 DOM class / 组件行为已更新到「已知 DOM class 知识库」？
 - [ ] MEMORY.md 中已记录的经验与本次发现有无矛盾？如有矛盾，MEMORY.md 需要更新
+- [ ] `docs/design-map.md` 已更新？（新增的页面/子块设计图 ID 已记录）
