@@ -139,7 +139,7 @@ const searchText = ref('')
 }
 
 .divider-label {
-  font-size: var(--o-r-font_size-tip1);
+  @include tip1;
   color: var(--o-color-info3);
   white-space: nowrap;
 }

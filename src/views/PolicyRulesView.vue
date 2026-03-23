@@ -265,16 +265,14 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
 }
 
 .banner-title {
-  font-size: var(--o-r-font_size-display2);
-  font-weight: 700;
   margin: 0 0 var(--o-r-gap-2);
-  line-height: 1.2;
+  @include display2;
+  font-weight: 700;
 }
 
 .banner-desc {
-  font-size: var(--o-r-font_size-text2);
-  line-height: 1.7;
   margin: 0 0 var(--o-r-gap-5);
+  @include text2;
   opacity: 0.9;
 }
 
@@ -320,11 +318,11 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
 }
 
 .filter-label {
-  font-size: var(--o-r-font_size-text1);
+  min-width: 32px;
+  padding-top: var(--o-r-gap-1);
+  @include text1;
   color: var(--o-color-info2);
   white-space: nowrap;
-  padding-top: var(--o-r-gap-1);
-  min-width: 32px;
 }
 
 .category-group {

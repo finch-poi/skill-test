@@ -58,10 +58,10 @@ const selectedKeys = ref([1])
 }
 
 .section-title {
-  font-size: var(--o-r-font_size-h4);
-  font-weight: 600;
   margin-top: 0;
   margin-bottom: var(--o-r-gap-5);
+  @include h4;
+  font-weight: 600;
   color: var(--o-color-info1);
 }
 

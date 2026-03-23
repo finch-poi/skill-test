@@ -74,8 +74,7 @@ const footerColumns = [
 
 .footer-desc {
   flex: 0 0 240px;
-  font-size: var(--o-r-font_size-tip1);
-  line-height: 1.7;
+  @include tip1;
   color: #999;
 }
 
@@ -92,10 +91,10 @@ const footerColumns = [
 }
 
 .footer-col-title {
-  font-size: var(--o-r-font_size-tip1);
+  margin: 0 0 var(--o-r-gap-3);
+  @include tip1;
   font-weight: 600;
   color: #fff;
-  margin: 0 0 var(--o-r-gap-3);
 }
 
 .footer-col-links {
@@ -108,7 +107,7 @@ const footerColumns = [
 }
 
 .footer-col-links a {
-  font-size: var(--o-r-font_size-tip2);
+  @include tip2;
   color: #999;
   text-decoration: none;
 }
@@ -121,7 +120,7 @@ const footerColumns = [
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding: var(--o-r-gap-4) var(--o-r-gap-7);
   text-align: center;
-  font-size: var(--o-r-font_size-tip2);
+  @include tip2;
   color: #666;
 }
 </style>

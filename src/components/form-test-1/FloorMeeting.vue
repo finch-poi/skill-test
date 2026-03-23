@@ -89,19 +89,19 @@ const descText = ref('')
 }
 
 .section-title {
-  font-size: var(--o-r-font_size-h4);
-  font-weight: 600;
   margin-top: 0;
   margin-bottom: var(--o-r-gap-5);
+  @include h4;
+  font-weight: 600;
   color: var(--o-color-info1);
 }
 
 .label-icon {
-  font-size: var(--o-r-font_size-tip1);
+  margin-left: var(--o-r-gap-1);
+  @include tip1;
   color: var(--o-color-info3);
   cursor: pointer;
   vertical-align: middle;
-  margin-left: var(--o-r-gap-1);
 }
 
 .upload-area {
@@ -112,7 +112,7 @@ const descText = ref('')
 }
 
 .upload-hint {
-  font-size: var(--o-r-font_size-tip1);
+  @include tip1;
   color: var(--o-color-info3);
 }
 </style>

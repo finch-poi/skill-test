@@ -90,19 +90,17 @@ const props = withDefaults(defineProps<AppSectionPropsT>(), {
   .section-title {
     display: flex;
     justify-content: center;
-    font-size: var(--o-r-font_size-display3);
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--o-color-info1);
     margin: 0;
+    @include display3;
+    font-weight: 500;
+    color: var(--o-color-info1);
   }
 
   .section-subtitle {
     display: flex;
     justify-content: center;
     margin-top: var(--o-r-gap-3);
-    font-size: var(--o-r-font_size-text1);
-    line-height: 1.6;
+    @include text1;
     color: var(--o-color-info2);
     text-align: center;
   }

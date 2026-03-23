@@ -60,10 +60,10 @@ const pages = [
 }
 
 .home-title {
-  font-size: var(--o-r-font_size-h2);
+  margin: 0 0 var(--o-r-gap-6) 0;
+  @include h2;
   font-weight: 600;
   color: var(--o-color-info1);
-  margin: 0 0 var(--o-r-gap-6) 0;
 }
 
 .page-list {
@@ -90,13 +90,13 @@ const pages = [
 }
 
 .page-name {
-  font-size: var(--o-r-font_size-text1);
+  @include text1;
   font-weight: 600;
   color: var(--o-color-primary1);
 }
 
 .page-desc {
-  font-size: var(--o-r-font_size-tip1);
+  @include tip1;
   color: var(--o-color-info3);
 }
 </style>

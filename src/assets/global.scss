@@ -30,7 +30,7 @@ body {
       min-width: 0;
     }
 
-    @include respond-to('<=pad_v') {
+    @include respond('<=pad_v') {
       flex-wrap: wrap;
 
       .o-input,

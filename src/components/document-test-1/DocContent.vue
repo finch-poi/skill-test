@@ -265,13 +265,13 @@ const xmlExample = `<domain type='kvm'>
 }
 
 .page-title {
-  font-size: var(--o-r-font_size-h2);
-  font-weight: 700;
-  color: var(--o-color-info1);
-  margin: 0 0 var(--o-r-gap-2) 0;
   display: flex;
   align-items: center;
   gap: var(--o-r-gap-2);
+  margin: 0 0 var(--o-r-gap-2) 0;
+  @include h2;
+  font-weight: 700;
+  color: var(--o-color-info1);
 }
 
 .anchor-icon {
@@ -315,38 +315,37 @@ h3:hover .anchor-icon {
 }
 
 .section-heading {
-  font-size: var(--o-r-font_size-h2);
-  font-weight: 600;
-  color: var(--o-color-info1);
-  margin: 0 0 var(--o-r-gap-4) 0;
   display: flex;
   align-items: center;
   gap: var(--o-r-gap-2);
+  margin: 0 0 var(--o-r-gap-4) 0;
   padding-top: var(--o-r-gap-6);
+  @include h2;
+  font-weight: 600;
+  color: var(--o-color-info1);
   border-top: 1px solid var(--o-color-control3);
 }
 
 .subsection-heading {
-  font-size: var(--o-r-font_size-h3);
-  font-weight: 600;
-  color: var(--o-color-info1);
-  margin: var(--o-r-gap-5) 0 var(--o-r-gap-3) 0;
   display: flex;
   align-items: center;
   gap: var(--o-r-gap-2);
+  margin: var(--o-r-gap-5) 0 var(--o-r-gap-3) 0;
+  @include h3;
+  font-weight: 600;
+  color: var(--o-color-info1);
 }
 
 .section-label {
   margin: 0 0 var(--o-r-gap-2) 0;
-  font-size: var(--o-r-font_size-text1);
+  @include text1;
   color: var(--o-color-info1);
 }
 
 .section-text {
-  font-size: var(--o-r-font_size-text1);
-  color: var(--o-color-info2);
-  line-height: 1.7;
   margin: 0 0 var(--o-r-gap-4) 0;
+  @include text1;
+  color: var(--o-color-info2);
 }
 
 .inline-message {
@@ -357,9 +356,9 @@ h3:hover .anchor-icon {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: var(--o-r-font_size-tip1);
-  color: var(--o-color-info2);
   margin-bottom: var(--o-r-gap-2);
+  @include tip1;
+  color: var(--o-color-info2);
 }
 
 .expand-btn {
@@ -375,7 +374,7 @@ h3:hover .anchor-icon {
   border-radius: var(--o-radius-xs);
   padding: var(--o-r-gap-4);
   font-family: monospace;
-  font-size: var(--o-r-font_size-tip1);
+  @include tip1;
   color: var(--o-color-info2);
   overflow-x: auto;
   margin: var(--o-r-gap-3) 0;
