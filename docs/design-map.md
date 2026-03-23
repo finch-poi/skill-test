@@ -22,6 +22,7 @@
 | 政策规则 | `/policy-rules` | `2:30326` | `src/views/PolicyRulesView.vue` | `src/components/policy-rules/`（暂无） | `e2e/policy-rules/`（暂无） |
 | 文档详情 | `/document-test-1` | `2:37111` | `src/views/DocumentTest1View.vue` | `src/components/document-test-1/` | `e2e/document-test-1/` |
 | 子站导航测试 | `/subsite-header-test` | — | `src/views/SubsiteHeaderTestView.vue` | — | `e2e/app-header/` |
+| 组件测试沙箱 | `/component-test` | — | `src/views/ComponentTestView.vue` | `src/components/component-test/` | `e2e/component-test/` |
 
 ---
 
@@ -44,7 +45,7 @@
 
 | 所属页面 | 块名称 | 设计图 ID | 对应楼层组件 |
 |---------|--------|---------|------------|
-| （暂无） | — | — | — |
+| `/component-test` | 菜单楼层（OMenu 菜单） | `4:1873` | `src/components/component-test/FloorMenu.vue` |
 
 ---
 

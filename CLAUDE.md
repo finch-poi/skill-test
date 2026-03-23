@@ -177,6 +177,12 @@ pnpm preview      # 预览生产构建
 
 收到"还原设计图"任务时，**先查 `docs/design-map.md`**，用 Pixso item-id 反查已有的代码文件和 e2e 目录。若是新页面则在完成后更新该文件。
 
+完成还原后，**必须**在对应源码文件的 `<script setup>` 顶部加一行注释，格式固定：
+```ts
+// 设计稿 ID：X:XXXX（Pixso item-id，{设计稿名称}）
+```
+这样打开源码文件时即可直接追溯设计图，无需再查索引表。
+
 收到"还原设计图"任务时，**必须**遵循 `docs/pixso-tdd-workflow.md` 中定义的完整流程：
 
 1. 用 Pixso MCP 读取设计稿（`mcp__pixso__get_image` + `mcp__pixso__get_node_dsl`）
