@@ -8,6 +8,8 @@ const pages = [
   { name: '政策规则', path: '/policy-rules', desc: '政策规则列表页面，含 Banner/锚点/筛选/卡片网格/分页' },
   { name: 'form-test-1', path: '/form-test-1', desc: '多步骤表单页面，含步骤条/表单字段/数据表格' },
   { name: 'document-test-1', path: '/document-test-1', desc: '文档详情页面，含侧边导航/内容区/表格/代码块' },
+  { name: 'subsite-header-test', path: '/subsite-header-test', desc: '子站导航组件测试页，含顶部迷你栏/主导航/移动端菜单' },
+  { name: 'component-test', path: '/component-test', desc: '组件测试沙箱，逐行验证 OpenDesign 组件调用' },
 ]
 </script>
 

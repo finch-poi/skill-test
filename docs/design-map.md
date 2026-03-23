@@ -21,6 +21,20 @@
 | 多步骤表单 | `/form-test-1` | `2:24919` | `src/views/FormTest1View.vue` | `src/components/form-test-1/` | `e2e/form-test-1/` |
 | 政策规则 | `/policy-rules` | `2:30326` | `src/views/PolicyRulesView.vue` | `src/components/policy-rules/`（暂无） | `e2e/policy-rules/`（暂无） |
 | 文档详情 | `/document-test-1` | `2:37111` | `src/views/DocumentTest1View.vue` | `src/components/document-test-1/` | `e2e/document-test-1/` |
+| 子站导航测试 | `/subsite-header-test` | — | `src/views/SubsiteHeaderTestView.vue` | — | `e2e/app-header/` |
+
+---
+
+## 公共组件 ↔ 设计图映射
+
+> 公共级别组件（src/components/）在此记录设计图位置，便于查找样式溯源。
+
+| 组件名 | 文件路径 | 设计图 ID | 设计图位置说明 | e2e 目录 |
+|-------|---------|---------|--------------|---------|
+| AppHeader | `src/components/AppHeader.vue` | `57:5659`（StateGroup 变体之一） | 导航 Navigation/顶部导航 → 属性1=PC, 属性2=昇腾, 属性3=主站, Dark=OFF | `e2e/app-header/floor-main-header.spec.ts` |
+| AppHeaderSubSite | `src/components/AppHeaderSubSite.vue` | `57:5659`（StateGroup 变体之一） | 导航 Navigation/顶部导航 → 属性1=PC, 属性2=昇腾, 属性3=子站, Dark=OFF | `e2e/app-header/floor-subsite-header.spec.ts` |
+| AppFooter | `src/components/AppFooter.vue` | — | 暂无独立设计图 ID | — |
+| AppSection | `src/components/AppSection.vue` | — | 通用楼层容器，无独立设计图 | — |
 
 ---
 

@@ -13,6 +13,12 @@
   },
   {
     "type": "fill",
+    "name": "app-icon-sun",
+    "componentName": "AppIconSun",
+    "path": "fill/sun.svg"
+  },
+  {
+    "type": "fill",
     "name": "app-icon-moon",
     "componentName": "AppIconMoon",
     "path": "fill/moon.svg"
@@ -46,5 +52,17 @@
     "name": "app-icon-arch-filter",
     "componentName": "AppIconArchFilter",
     "path": "fill/arch-filter.svg"
+  },
+  {
+    "type": "stroke",
+    "name": "app-icon-menu",
+    "componentName": "AppIconMenu",
+    "path": "stroke/menu.svg"
+  },
+  {
+    "type": "color",
+    "name": "app-icon-ascend-logo",
+    "componentName": "AppIconAscendLogo",
+    "path": "color/ascend-logo.svg"
   }
 ]

@@ -23,6 +23,16 @@ const router = createRouter({
       name: 'document-test-1',
       component: () => import('@/views/DocumentTest1View.vue'),
     },
+    {
+      path: '/subsite-header-test',
+      name: 'subsite-header-test',
+      component: () => import('@/views/SubsiteHeaderTestView.vue'),
+    },
+    {
+      path: '/component-test',
+      name: 'component-test',
+      component: () => import('@/views/ComponentTestView.vue'),
+    },
   ],
 })
 

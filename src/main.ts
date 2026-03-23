@@ -8,8 +8,7 @@ import '@opensig/opendesign/es/index.css'
 import '@opensig/opendesign-token/themes/e.light.token.css'
 import '@opensig/opendesign-token/themes/e.dark.token.css'
 import './assets/global.scss'
-
-document.documentElement.setAttribute('data-o-theme', 'e.light')
+import '@/composables/useTheme'
 
 const app = createApp(App)
 

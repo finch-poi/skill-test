@@ -39,7 +39,9 @@ pnpm preview      # 预览生产构建
 
 - **所有 `<style>` 标签必须加 `lang="scss"`**，不允许裸 CSS
 - Mixin 已通过 `vite.config.ts` 的 `css.preprocessorOptions.scss.additionalData` 全局注入，**各 `.vue` 文件中直接使用 `@include`，禁止手动 `@use` mixin 文件**
-- 响应式断点统一使用 `@include respond-to(...)` mixin，文件路径 `src/assets/style/mixin/screen.scss`
+- 响应式断点统一使用 `@include respond(...)` mixin（注意：是 `respond` 不是 `respond-to`），文件路径 `src/assets/style/mixin/screen.scss`
+  - 有效断点键：`phone`、`>phone`、`pad_v`、`<=pad_v`、`>pad_v`、`pad_h`、`<=pad`、`>pad`、`laptop`、`<=laptop`、`>laptop`、`pc` 等
+  - **⚠️ 不存在** `<=pad_h`（应用 `<=pad`）、`<=phone`（应用 `phone`）、`respond-to` 均为错误用法
 - 字号响应式使用 `@include h1` / `@include text1` 等 font mixin，文件路径 `src/assets/style/mixin/font.scss`
 - 如 mixin 文件尚未创建，参考 `../opendesign-skills/skills/openeuler-frontend-tools/references/mixins.md` 创建
 
