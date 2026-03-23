@@ -43,6 +43,51 @@ pnpm preview      # 预览生产构建
 - 字号响应式使用 `@include h1` / `@include text1` 等 font mixin，文件路径 `src/assets/style/mixin/font.scss`
 - 如 mixin 文件尚未创建，参考 `../opendesign-skills/skills/openeuler-frontend-tools/references/mixins.md` 创建
 
+#### Font Mixin 规范（强制）
+
+**凡涉及字号或行高，必须使用 font mixin，禁止直接写 `font-size` / `line-height`：**
+
+```scss
+// ✅ 正确
+.title { @include h2; }
+
+// ❌ 错误：直接写 token，丢失 line-height
+.title { font-size: var(--o-r-font_size-h2); }
+
+// ❌ 错误：硬编码 line-height，不同断点下不正确
+.title { font-size: var(--o-r-font_size-h2); line-height: 1.7; }
+```
+
+例外：纯装饰性相对字号（如 `font-size: 0.8em`）或 monospace 代码字体，可不使用 mixin。
+
+**Font mixin 支持双模式：**
+
+```scss
+// 模式 1：直接应用（无参数）——输出 CSS 变量 + font-size/line-height 属性
+.title {
+  @include display1;
+}
+
+// 模式 2：只暴露为 CSS 变量（传前缀字符串）——不输出 font-size/line-height 属性
+// 适用于将字号值传递给子元素或组件内部使用的场景
+.card {
+  @include display1('card-title-');
+  // 子元素可通过 var(--card-title-font-size) 读取
+}
+```
+
+**`@include` 在规则块中的顺序：** 盒模型属性（`display`/`margin`/`padding`）在前，`@include` 及字体属性（`font-weight`/`color`）在后，覆盖 mixin 的属性写在 `@include` 之后：
+
+```scss
+.title {
+  display: flex;
+  margin: 0 0 var(--o-r-gap-4);
+  @include h2;
+  font-weight: 600;        // 覆盖 mixin 的属性写在 @include 之后
+  color: var(--o-color-info1);
+}
+```
+
 ### 布局规范
 
 #### 页面布局模式判断（优先级最高）
