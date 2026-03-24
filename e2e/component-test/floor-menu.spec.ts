@@ -9,11 +9,15 @@ test.describe('component-test OMenu 菜单楼层', () => {
   // ---- 维度1：结构与组件正确性 ----
 
   test('楼层标题含"OMenu 菜单"', async ({ page }) => {
-    await expect(page.locator('.floor-title')).toContainText('OMenu 菜单')
+    await expect(
+      page.locator('.section-title').filter({ hasText: 'OMenu 菜单' }).first(),
+    ).toBeVisible()
   })
 
   test('楼层描述含设计稿 ID 4:1873', async ({ page }) => {
-    await expect(page.locator('.floor-desc')).toContainText('4:1873')
+    await expect(
+      page.locator('.section-subtitle').filter({ hasText: '4:1873' }).first(),
+    ).toBeVisible()
   })
 
   test('亮色区块存在', async ({ page }) => {
@@ -31,8 +35,8 @@ test.describe('component-test OMenu 菜单楼层', () => {
     await expect(g1).toBeVisible()
     await expect(g2).toBeVisible()
     // 两者不是同一节点（边界框不重叠）
-    const y1 = await g1.evaluate(el => el.getBoundingClientRect().bottom)
-    const y2 = await g2.evaluate(el => el.getBoundingClientRect().top)
+    const y1 = await g1.evaluate((el) => el.getBoundingClientRect().bottom)
+    const y2 = await g2.evaluate((el) => el.getBoundingClientRect().top)
     expect(y1).toBeLessThan(y2)
   })
 
@@ -41,8 +45,8 @@ test.describe('component-test OMenu 菜单楼层', () => {
     const sGroup = page.locator('[data-testid="menu-s-group"]')
     await expect(sStates).toBeVisible()
     await expect(sGroup).toBeVisible()
-    const y1 = await sStates.evaluate(el => el.getBoundingClientRect().bottom)
-    const y2 = await sGroup.evaluate(el => el.getBoundingClientRect().top)
+    const y1 = await sStates.evaluate((el) => el.getBoundingClientRect().bottom)
+    const y2 = await sGroup.evaluate((el) => el.getBoundingClientRect().top)
     expect(y1).toBeLessThan(y2)
   })
 
@@ -104,7 +108,7 @@ test.describe('component-test OMenu 菜单楼层', () => {
   test('亮色行中 demo 卡片有阴影（非 none）', async ({ page }) => {
     const card = page.locator('[data-testid="menu-row-light"] .menu-card').first()
     await expect(card).toBeVisible()
-    const shadow = await card.evaluate(el => getComputedStyle(el).boxShadow)
+    const shadow = await card.evaluate((el) => getComputedStyle(el).boxShadow)
     expect(shadow).not.toBe('none')
   })
 
@@ -122,7 +126,7 @@ test.describe('component-test OMenu 菜单楼层', () => {
 
   test('亮色行三列并排（flex 横向）', async ({ page }) => {
     const row = page.locator('[data-testid="menu-row-light"] .menu-row')
-    const display = await row.evaluate(el => getComputedStyle(el).display)
+    const display = await row.evaluate((el) => getComputedStyle(el).display)
     expect(display).toBe('flex')
   })
 
@@ -133,7 +137,7 @@ test.describe('component-test OMenu 菜单楼层', () => {
     const menu = page.locator('[data-testid="menu-s-group"]')
     const selectedItem = menu.locator('.o-menu-item-selected').first()
     await expect(selectedItem).toBeVisible()
-    const bg = await selectedItem.evaluate(el => getComputedStyle(el).backgroundImage)
+    const bg = await selectedItem.evaluate((el) => getComputedStyle(el).backgroundImage)
     // backgroundImage 应为 linear-gradient
     expect(bg).toContain('gradient')
   })
@@ -142,25 +146,27 @@ test.describe('component-test OMenu 菜单楼层', () => {
     const menu = page.locator('[data-testid="menu-group1"]')
     const selectedItem = menu.locator('.o-menu-item-selected').first()
     await expect(selectedItem).toBeVisible()
-    const bg = await selectedItem.evaluate(el => getComputedStyle(el).backgroundImage)
+    const bg = await selectedItem.evaluate((el) => getComputedStyle(el).backgroundImage)
     // 纯色选中背景 backgroundImage 应为 none
     expect(bg).toBe('none')
   })
 
   test('暗色区块有深色背景', async ({ page }) => {
     const darkRow = page.locator('[data-testid="menu-row-dark"]')
-    const bg = await darkRow.evaluate(el => getComputedStyle(el).backgroundColor)
+    const bg = await darkRow.evaluate((el) => getComputedStyle(el).backgroundColor)
     // background: #1f2127 → rgb(31,33,39)
     expect(bg).toBe('rgb(31, 33, 39)')
   })
 
   test('楼层标题字号来自响应式 mixin（非零）', async ({ page }) => {
-    const fontSize = await page.locator('.floor-title').evaluate(
-      el => parseFloat(getComputedStyle(el).fontSize)
-    )
-    // h3 mixin 在 1920px 断点 ≈ 18–24px
-    expect(fontSize).toBeGreaterThanOrEqual(16)
-    expect(fontSize).toBeLessThanOrEqual(28)
+    const fontSize = await page
+      .locator('.section-title')
+      .filter({ hasText: 'OMenu 菜单' })
+      .first()
+      .evaluate((el) => parseFloat(getComputedStyle(el).fontSize))
+    // display3 mixin 在 1920px 断点 ≈ 40px
+    expect(fontSize).toBeGreaterThanOrEqual(32)
+    expect(fontSize).toBeLessThanOrEqual(48)
   })
 
   // ---- 维度5：交互行为 ----
@@ -194,38 +200,38 @@ test.describe('component-test OMenu 菜单楼层', () => {
   // ---- 维度6：相对位置 ----
 
   test('亮色区块在暗色区块上方', async ({ page }) => {
-    const lightY = await page.locator('[data-testid="menu-row-light"]').evaluate(
-      el => el.getBoundingClientRect().top
-    )
-    const darkY = await page.locator('[data-testid="menu-row-dark"]').evaluate(
-      el => el.getBoundingClientRect().top
-    )
+    const lightY = await page
+      .locator('[data-testid="menu-row-light"]')
+      .evaluate((el) => el.getBoundingClientRect().top)
+    const darkY = await page
+      .locator('[data-testid="menu-row-dark"]')
+      .evaluate((el) => el.getBoundingClientRect().top)
     expect(lightY).toBeLessThan(darkY)
   })
 
   test('Column A 在 Column B 左侧', async ({ page }) => {
     const colA = page.locator('[data-testid="menu-m-states"]')
     const colB = page.locator('[data-testid="menu-group1"]')
-    const xA = await colA.evaluate(el => el.getBoundingClientRect().left)
-    const xB = await colB.evaluate(el => el.getBoundingClientRect().left)
+    const xA = await colA.evaluate((el) => el.getBoundingClientRect().left)
+    const xB = await colB.evaluate((el) => el.getBoundingClientRect().left)
     expect(xA).toBeLessThan(xB)
   })
 
   test('Column B 在 Column C 左侧', async ({ page }) => {
     const colB = page.locator('[data-testid="menu-group1"]')
     const colC = page.locator('[data-testid="menu-s-states"]')
-    const xB = await colB.evaluate(el => el.getBoundingClientRect().left)
-    const xC = await colC.evaluate(el => el.getBoundingClientRect().left)
+    const xB = await colB.evaluate((el) => el.getBoundingClientRect().left)
+    const xC = await colC.evaluate((el) => el.getBoundingClientRect().left)
     expect(xB).toBeLessThan(xC)
   })
 
   test('Group1 在 Group2 上方（同列，垂直排列）', async ({ page }) => {
-    const g1Y = await page.locator('[data-testid="menu-group1"]').evaluate(
-      el => el.getBoundingClientRect().top
-    )
-    const g2Y = await page.locator('[data-testid="menu-group2"]').evaluate(
-      el => el.getBoundingClientRect().top
-    )
+    const g1Y = await page
+      .locator('[data-testid="menu-group1"]')
+      .evaluate((el) => el.getBoundingClientRect().top)
+    const g2Y = await page
+      .locator('[data-testid="menu-group2"]')
+      .evaluate((el) => el.getBoundingClientRect().top)
     expect(g1Y).toBeLessThan(g2Y)
   })
 
@@ -233,7 +239,7 @@ test.describe('component-test OMenu 菜单楼层', () => {
 
   test('列间 gap 来自 CSS 变量（非零）', async ({ page }) => {
     const row = page.locator('[data-testid="menu-row-light"] .menu-row')
-    const gap = await row.evaluate(el => parseFloat(getComputedStyle(el).gap))
+    const gap = await row.evaluate((el) => parseFloat(getComputedStyle(el).gap))
     expect(gap).toBeGreaterThan(0)
   })
 
@@ -241,8 +247,8 @@ test.describe('component-test OMenu 菜单楼层', () => {
 
   test('三列顶部对齐（误差 ≤ 2px）', async ({ page }) => {
     const cols = page.locator('[data-testid="menu-row-light"] .menu-col')
-    const tops = await cols.evaluateAll(
-      els => els.map(el => Math.round(el.getBoundingClientRect().top))
+    const tops = await cols.evaluateAll((els) =>
+      els.map((el) => Math.round(el.getBoundingClientRect().top)),
     )
     const diff = Math.max(...tops) - Math.min(...tops)
     expect(diff).toBeLessThanOrEqual(2)

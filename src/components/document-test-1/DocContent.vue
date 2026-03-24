@@ -24,11 +24,9 @@ const disk1Columns: DataTableColumnT[] = [
       return h(
         'div',
         { style: 'line-height: 1.6' },
-        lines.map((line, i) =>
-          i < lines.length - 1
-            ? [h('span', line), h('br')]
-            : h('span', line)
-        ).flat()
+        lines
+          .map((line, i) => (i < lines.length - 1 ? [h('span', line), h('br')] : h('span', line)))
+          .flat(),
       )
     },
   },
@@ -125,10 +123,37 @@ const xmlExample = `<domain type='kvm'>
         <OLink color="primary" target="_blank" href="#">
           链接按钮
           <template #suffix>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <polyline
+                points="15 3 21 3 21 9"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <line
+                x1="10"
+                y1="14"
+                x2="21"
+                y2="3"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </template>
         </OLink>
@@ -137,11 +162,23 @@ const xmlExample = `<domain type='kvm'>
 
     <!-- Decorative banner -->
     <div class="banner-area">
-      <svg class="banner-deco" viewBox="0 0 600 160" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
-        <path d="M600 160H0V120L80 80L160 100L240 40L340 70L420 20L500 50L560 10L600 30V160Z" fill="rgba(255,255,255,0.06)"/>
-        <path d="M600 160H200V140L280 110L360 130L440 90L520 110L580 80L600 90V160Z" fill="rgba(255,255,255,0.08)"/>
-        <ellipse cx="520" cy="40" rx="90" ry="55" fill="rgba(255,255,255,0.05)"/>
-        <ellipse cx="460" cy="60" rx="60" ry="38" fill="rgba(255,255,255,0.06)"/>
+      <svg
+        class="banner-deco"
+        viewBox="0 0 600 160"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMaxYMax slice"
+      >
+        <path
+          d="M600 160H0V120L80 80L160 100L240 40L340 70L420 20L500 50L560 10L600 30V160Z"
+          fill="rgba(255,255,255,0.06)"
+        />
+        <path
+          d="M600 160H200V140L280 110L360 130L440 90L520 110L580 80L600 90V160Z"
+          fill="rgba(255,255,255,0.08)"
+        />
+        <ellipse cx="520" cy="40" rx="90" ry="55" fill="rgba(255,255,255,0.05)" />
+        <ellipse cx="460" cy="60" rx="60" ry="38" fill="rgba(255,255,255,0.06)" />
       </svg>
     </div>
 
@@ -154,7 +191,8 @@ const xmlExample = `<domain type='kvm'>
 
       <p class="section-label"><strong>概述</strong></p>
       <p class="section-text">
-        XML配置文件可以配置虚拟磁存储设备信息，包括 dstLocal　存储介质及其存储类型等信息，本节介绍存储设备的配置方法。
+        XML配置文件可以配置虚拟磁存储设备信息，包括
+        dstLocal　存储介质及其存储类型等信息，本节介绍存储设备的配置方法。
       </p>
 
       <OMessage status="info" title="标题" class="inline-message">
@@ -172,7 +210,7 @@ const xmlExample = `<domain type='kvm'>
       <!-- Table 1 caption -->
       <div class="table-caption">
         <span>表1：元素disk的常用属性</span>
-        <OButton variant="text" color="primary" size="mini" class="expand-btn">展开 ▼</OButton>
+        <OButton variant="text" color="primary" size="small" class="expand-btn">展开 ▼</OButton>
       </div>
 
       <ODataTable
@@ -188,7 +226,8 @@ const xmlExample = `<domain type='kvm'>
         <span class="anchor-icon">∞</span>
       </h3>
       <p class="section-text">
-        以下示例展示了如何通过XML配置文件配置虚拟机的网络设备，使用桥接模式连接到宿主机的 br0 网桥，并指定使用 virtio 驱动模型。
+        以下示例展示了如何通过XML配置文件配置虚拟机的网络设备，使用桥接模式连接到宿主机的 br0
+        网桥，并指定使用 virtio 驱动模型。
       </p>
 
       <pre class="code-block"><code>{{ xmlExample }}</code></pre>
@@ -218,22 +257,82 @@ const xmlExample = `<domain type='kvm'>
     <!-- Floating action buttons -->
     <div class="floating-actions">
       <OButton variant="outline" size="small" class="action-btn" title="文档反馈">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </OButton>
       <OButton variant="outline" size="small" class="action-btn" title="评价">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-          <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+          <path
+            d="M8 14s1.5 2 4 2 4-2 4-2"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <line
+            x1="9"
+            y1="9"
+            x2="9.01"
+            y2="9"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <line
+            x1="15"
+            y1="9"
+            x2="15.01"
+            y2="9"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </OButton>
       <OButton variant="outline" size="small" class="action-btn" title="刷新">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polyline points="1 4 1 10 7 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M3.51 15a9 9 0 102.13-9.36L1 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polyline
+            points="1 4 1 10 7 10"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M3.51 15a9 9 0 102.13-9.36L1 10"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </OButton>
     </div>
