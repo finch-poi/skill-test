@@ -131,7 +131,7 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
 
     <!-- 锚点导航 -->
     <div class="anchor-nav-wrap" id="anchor-container">
-      <OAnchor layout="h" container="#anchor-container" :change-hash="false">
+      <OAnchor layout="h" container="#anchor-container">
         <OAnchorItem
           v-for="sec in sections"
           :key="sec.id"
@@ -144,82 +144,82 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
     <!-- 主内容 -->
     <AppSection class="policy-main-section">
       <template #main>
-      <!-- 筛选面板 -->
-      <div class="filter-panel">
-        <!-- 分类 -->
-        <div class="filter-row filter-category">
-          <span class="filter-label">分类</span>
-          <ORadioGroup v-model="activeCategory" class="category-group">
-            <ORadio v-for="cat in categories" :key="cat.value" :value="cat.value">
-              <template #radio="{ checked }">
-                <OToggle :checked="checked">{{ cat.label }}</OToggle>
-              </template>
-            </ORadio>
-          </ORadioGroup>
+        <!-- 筛选面板 -->
+        <div class="filter-panel">
+          <!-- 分类 -->
+          <div class="filter-row filter-category">
+            <span class="filter-label">分类</span>
+            <ORadioGroup v-model="activeCategory" class="category-group">
+              <ORadio v-for="cat in categories" :key="cat.value" :value="cat.value">
+                <template #radio="{ checked }">
+                  <OToggle :checked="checked">{{ cat.label }}</OToggle>
+                </template>
+              </ORadio>
+            </ORadioGroup>
+          </div>
+
+          <!-- 时间 / 作者 / 标签 -->
+          <div class="filter-row filter-secondary">
+            <div class="filter-item">
+              <span class="filter-label">时间</span>
+              <OInput v-model="filterTime" placeholder="全部" class="filter-input" />
+            </div>
+            <div class="filter-item">
+              <span class="filter-label">作者</span>
+              <OInput v-model="filterAuthor" placeholder="全部" class="filter-input" />
+            </div>
+            <div class="filter-item">
+              <span class="filter-label">标签</span>
+              <OSelect
+                v-model="filterTags"
+                multiple
+                clearable
+                placeholder="全部"
+                class="filter-tag-select"
+              >
+                <OOption
+                  v-for="opt in tagOptions"
+                  :key="opt.value"
+                  :label="opt.label"
+                  :value="opt.value"
+                />
+              </OSelect>
+            </div>
+          </div>
         </div>
 
-        <!-- 时间 / 作者 / 标签 -->
-        <div class="filter-row filter-secondary">
-          <div class="filter-item">
-            <span class="filter-label">时间</span>
-            <OInput v-model="filterTime" placeholder="全部" class="filter-input" />
-          </div>
-          <div class="filter-item">
-            <span class="filter-label">作者</span>
-            <OInput v-model="filterAuthor" placeholder="全部" class="filter-input" />
-          </div>
-          <div class="filter-item">
-            <span class="filter-label">标签</span>
-            <OSelect
-              v-model="filterTags"
-              multiple
-              clearable
-              placeholder="全部"
-              class="filter-tag-select"
-            >
-              <OOption
-                v-for="opt in tagOptions"
-                :key="opt.value"
-                :label="opt.label"
-                :value="opt.value"
-              />
-            </OSelect>
-          </div>
+        <!-- 内容区占位锚点 -->
+        <div id="section1" />
+        <div id="section2" />
+        <div id="section3" />
+
+        <!-- 卡片网格 -->
+        <div class="card-grid">
+          <OCard
+            v-for="card in cards"
+            :key="card.id"
+            :cover="card.cover"
+            :cover-ratio="1.7"
+            :title="card.title"
+            :title-row="2"
+            :title-max-row="2"
+            :detail="card.detail"
+            :detail-row="3"
+            :detail-max-row="3"
+            hoverable
+          />
         </div>
-      </div>
 
-      <!-- 内容区占位锚点 -->
-      <div id="section1" />
-      <div id="section2" />
-      <div id="section3" />
-
-      <!-- 卡片网格 -->
-      <div class="card-grid">
-        <OCard
-          v-for="card in cards"
-          :key="card.id"
-          :cover="card.cover"
-          :cover-ratio="1.7"
-          :title="card.title"
-          :title-row="2"
-          :title-max-row="2"
-          :detail="card.detail"
-          :detail-row="3"
-          :detail-max-row="3"
-          hoverable
-        />
-      </div>
-
-      <!-- 分页 -->
-      <div class="pagination-wrap">
-        <OPagination
-          v-model:page="currentPage"
-          v-model:page-size="pageSize"
-          :total="total"
-          :layout="['total', 'pagesize', 'pager', 'jumper']"
-          :page-sizes="[20, 40, 60]"
-        />
-      </div>
+        <!-- 分页 -->
+        <div class="pagination-wrap">
+          <OPagination
+            v-model:page="currentPage"
+            v-model:page-size="pageSize"
+            :total="total"
+            :layout="['total', 'pagesize', 'pager', 'jumper']"
+            :page-sizes="[20, 40, 60]"
+          />
+        </div>
       </template>
     </AppSection>
 
@@ -280,7 +280,8 @@ watch([currentPage, pageSize, activeCategory], fetchCards)
   width: 240px;
   height: 240px;
   flex-shrink: 0;
-  background: url('https://openeuler.org/images/policy-rules/banner-illus.svg') no-repeat center/contain;
+  background: url('https://openeuler.org/images/policy-rules/banner-illus.svg') no-repeat
+    center/contain;
 }
 
 /* ─── 锚点导航 ─── */

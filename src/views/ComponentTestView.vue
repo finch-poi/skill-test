@@ -161,7 +161,6 @@ const toggleCollapse = () => {
           size="small"
           container="#component-test-page"
           :target-offset="20"
-          :change-hash="false"
           class="right-anchor-list"
         >
           <OAnchorItem
