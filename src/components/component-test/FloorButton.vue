@@ -126,7 +126,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="outline-light-large">
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="large"
               round="pill"
               data-testid="outline-light-l-enabled"
@@ -137,7 +137,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="large"
               round="pill"
               disabled
@@ -153,7 +153,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="outline-light-medium">
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="medium"
               round="pill"
               data-testid="outline-light-m-enabled"
@@ -164,7 +164,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="medium"
               round="pill"
               disabled
@@ -180,7 +180,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="outline-light-small">
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="small"
               round="pill"
               data-testid="outline-light-s-enabled"
@@ -191,7 +191,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="small"
               round="pill"
               disabled
@@ -391,14 +391,14 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="medium"
               :icon="OIconEdit"
               data-testid="icon-only-btn"
             />
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="medium"
               :icon="OIconDelete"
               data-testid="icon-only-danger"
@@ -527,7 +527,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="outline-dark-all">
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="large"
               round="pill"
               data-testid="outline-dark-l-enabled"
@@ -538,7 +538,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="large"
               round="pill"
               disabled
@@ -550,7 +550,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="medium"
               round="pill"
               data-testid="outline-dark-m-enabled"
@@ -561,7 +561,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="medium"
               round="pill"
               disabled
@@ -573,7 +573,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="small"
               round="pill"
               data-testid="outline-dark-s-enabled"
@@ -584,7 +584,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="outline"
-              color="normal"
+              color="primary"
               size="small"
               round="pill"
               disabled
