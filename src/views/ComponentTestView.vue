@@ -38,7 +38,31 @@ import FloorLoading from '@/components/component-test/FloorLoading.vue'
 import FloorResult from '@/components/component-test/FloorResult.vue'
 import AppBottomNav from '@/components/AppBottomNav.vue'
 import { OAnchor, OAnchorItem, OButton } from '@opensig/opendesign'
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+
+import '@opensig/opendesign-token/themes/a.light.token.css'
+import '@opensig/opendesign-token/themes/a.dark.token.css'
+
+const scrollToHash = () => {
+  const hash = window.location.hash.slice(1)
+  if (hash) {
+    nextTick(() => {
+      const el = document.getElementById(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    })
+  }
+}
+
+onMounted(() => {
+  scrollToHash()
+  window.addEventListener('hashchange', scrollToHash)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('hashchange', scrollToHash)
+})
 
 const anchorItems = [
   { id: 'floor-menu', title: 'Menu 菜单' },
@@ -85,6 +109,17 @@ const collapsed = ref(false)
 const toggleCollapse = () => {
   collapsed.value = !collapsed.value
 }
+
+const originalTheme = ref('')
+
+onMounted(() => {
+  originalTheme.value = document.documentElement.getAttribute('data-o-theme') || 'e.light'
+  document.documentElement.setAttribute('data-o-theme', 'a.light')
+})
+
+onUnmounted(() => {
+  document.documentElement.setAttribute('data-o-theme', originalTheme.value)
+})
 </script>
 
 <template>

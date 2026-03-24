@@ -41,6 +41,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="emphasis-light-large">
             <OButton
               variant="solid"
+              color="primary"
               size="large"
               round="pill"
               data-testid="emphasis-light-l-enabled"
@@ -51,6 +52,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="solid"
+              color="primary"
               size="large"
               round="pill"
               disabled
@@ -66,6 +68,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="emphasis-light-medium">
             <OButton
               variant="solid"
+              color="primary"
               size="medium"
               round="pill"
               data-testid="emphasis-light-m-enabled"
@@ -76,6 +79,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="solid"
+              color="primary"
               size="medium"
               round="pill"
               disabled
@@ -91,6 +95,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="emphasis-light-small">
             <OButton
               variant="solid"
+              color="primary"
               size="small"
               round="pill"
               data-testid="emphasis-light-s-enabled"
@@ -101,6 +106,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="solid"
+              color="primary"
               size="small"
               round="pill"
               disabled
@@ -409,6 +415,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="solid"
+              color="primary"
               size="medium"
               round="pill"
               :loading="true"
@@ -436,6 +443,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="emphasis-dark-large">
             <OButton
               variant="solid"
+              color="primary"
               size="large"
               round="pill"
               data-testid="emphasis-dark-l-enabled"
@@ -446,6 +454,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="solid"
+              color="primary"
               size="large"
               round="pill"
               disabled
@@ -461,6 +470,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="emphasis-dark-medium">
             <OButton
               variant="solid"
+              color="primary"
               size="medium"
               round="pill"
               data-testid="emphasis-dark-m-enabled"
@@ -471,6 +481,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="solid"
+              color="primary"
               size="medium"
               round="pill"
               disabled
@@ -486,6 +497,7 @@ function triggerLoading() {
           <div class="btn-row" data-testid="emphasis-dark-small">
             <OButton
               variant="solid"
+              color="primary"
               size="small"
               round="pill"
               data-testid="emphasis-dark-s-enabled"
@@ -496,6 +508,7 @@ function triggerLoading() {
             </OButton>
             <OButton
               variant="solid"
+              color="primary"
               size="small"
               round="pill"
               disabled

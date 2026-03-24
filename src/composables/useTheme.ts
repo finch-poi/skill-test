@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 
-type Theme = 'e.light' | 'e.dark'
+type Theme = `${string}.${'light' | 'dark'}`
 
 const STORAGE_KEY = 'o-theme'
 
@@ -19,10 +19,12 @@ function applyTheme(t: Theme) {
 applyTheme(theme.value)
 
 export function useTheme() {
-  const isDark = computed(() => theme.value === 'e.dark')
+  const isDark = computed(() => theme.value.endsWith('.dark'))
 
   function toggleTheme() {
-    theme.value = theme.value === 'e.light' ? 'e.dark' : 'e.light'
+    const suffix = theme.value.endsWith('.dark') ? '.light' : '.dark'
+    const prefix = theme.value.replace(/\.(light|dark)$/, '')
+    theme.value = `${prefix}${suffix}` as Theme
     applyTheme(theme.value)
   }
 
