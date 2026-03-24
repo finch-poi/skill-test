@@ -37,48 +37,92 @@ import FloorPopover from '@/components/component-test/FloorPopover.vue'
 import FloorLoading from '@/components/component-test/FloorLoading.vue'
 import FloorResult from '@/components/component-test/FloorResult.vue'
 import AppBottomNav from '@/components/AppBottomNav.vue'
+import RightAnchorNav from '@/components/RightAnchorNav.vue'
+
+const anchorItems = [
+  { id: 'floor-menu', title: 'Menu 菜单' },
+  { id: 'floor-tab', title: 'Tab 标签页' },
+  { id: 'floor-breadcrumb', title: 'Breadcrumb 面包屑' },
+  { id: 'floor-anchor', title: 'Anchor 锚点' },
+  { id: 'floor-pagination', title: 'Pagination 分页' },
+  { id: 'floor-step', title: 'Step 步骤条' },
+  { id: 'floor-button', title: 'Button 按钮' },
+  { id: 'floor-dropdown', title: 'Dropdown 下拉菜单' },
+  { id: 'floor-radio', title: 'Radio 单选框' },
+  { id: 'floor-checkbox', title: 'Checkbox 复选框' },
+  { id: 'floor-switch', title: 'Switch 开关' },
+  { id: 'floor-scrollbar', title: 'Scrollbar 滚动条' },
+  { id: 'floor-toggle', title: 'Toggle 切换' },
+  { id: 'floor-float-button', title: 'FloatButton 悬浮按钮' },
+  { id: 'floor-input', title: 'Input 输入框' },
+  { id: 'floor-textarea', title: 'Textarea 文本域' },
+  { id: 'floor-select', title: 'Select 选择器' },
+  { id: 'floor-upload', title: 'Upload 上传' },
+  { id: 'floor-rate', title: 'Rate 评分' },
+  { id: 'floor-cascader', title: 'Cascader 级联选择器' },
+  { id: 'floor-slider', title: 'Slider 滑块' },
+  { id: 'floor-divider', title: 'Divider 分割线' },
+  { id: 'floor-tag', title: 'Tag 标签' },
+  { id: 'floor-avatar', title: 'Avatar 头像' },
+  { id: 'floor-badge', title: 'Badge 徽标' },
+  { id: 'floor-dialog', title: 'Dialog 对话框' },
+  { id: 'floor-list', title: 'List 列表' },
+  { id: 'floor-data-table', title: 'DataTable 数据表格' },
+  { id: 'floor-form', title: 'Form 表单' },
+  { id: 'floor-card', title: 'Card 卡片' },
+  { id: 'floor-progress', title: 'Progress 进度条' },
+  { id: 'floor-inline-message', title: 'InlineMessage 内联消息' },
+  { id: 'floor-global-message', title: 'GlobalMessage 全局消息' },
+  { id: 'floor-toast', title: 'Toast 轻提示' },
+  { id: 'floor-popover', title: 'Popover 气泡卡片' },
+  { id: 'floor-loading', title: 'Loading 加载' },
+  { id: 'floor-result', title: 'Result 结果' },
+]
 </script>
 
 <template>
   <div class="component-test-page">
-    <FloorMenu />
-    <FloorTab />
-    <FloorBreadcrumb />
-    <FloorAnchor />
-    <FloorPagination />
-    <FloorStep />
-    <FloorButton />
-    <FloorDropdown />
-    <FloorRadio />
-    <FloorCheckbox />
-    <FloorSwitch />
-    <FloorScrollbar />
-    <FloorToggle />
-    <FloorFloatButton />
-    <FloorInput />
-    <FloorTextarea />
-    <FloorSelect />
-    <FloorUpload />
-    <FloorRate />
-    <FloorCascader />
-    <FloorSlider />
-    <FloorDivider />
-    <FloorTag />
-    <FloorAvatar />
-    <FloorBadge />
-    <FloorDialog />
-    <FloorList />
-    <FloorDataTable />
-    <FloorForm />
-    <FloorCard />
-    <FloorProgress />
-    <FloorInlineMessage />
-    <FloorGlobalMessage />
-    <FloorToast />
-    <FloorPopover />
-    <FloorLoading />
-    <FloorResult />
-    <AppBottomNav />
+    <div class="component-test-content">
+      <div id="floor-menu"><FloorMenu /></div>
+      <div id="floor-tab"><FloorTab /></div>
+      <div id="floor-breadcrumb"><FloorBreadcrumb /></div>
+      <div id="floor-anchor"><FloorAnchor /></div>
+      <div id="floor-pagination"><FloorPagination /></div>
+      <div id="floor-step"><FloorStep /></div>
+      <div id="floor-button"><FloorButton /></div>
+      <div id="floor-dropdown"><FloorDropdown /></div>
+      <div id="floor-radio"><FloorRadio /></div>
+      <div id="floor-checkbox"><FloorCheckbox /></div>
+      <div id="floor-switch"><FloorSwitch /></div>
+      <div id="floor-scrollbar"><FloorScrollbar /></div>
+      <div id="floor-toggle"><FloorToggle /></div>
+      <div id="floor-float-button"><FloorFloatButton /></div>
+      <div id="floor-input"><FloorInput /></div>
+      <div id="floor-textarea"><FloorTextarea /></div>
+      <div id="floor-select"><FloorSelect /></div>
+      <div id="floor-upload"><FloorUpload /></div>
+      <div id="floor-rate"><FloorRate /></div>
+      <div id="floor-cascader"><FloorCascader /></div>
+      <div id="floor-slider"><FloorSlider /></div>
+      <div id="floor-divider"><FloorDivider /></div>
+      <div id="floor-tag"><FloorTag /></div>
+      <div id="floor-avatar"><FloorAvatar /></div>
+      <div id="floor-badge"><FloorBadge /></div>
+      <div id="floor-dialog"><FloorDialog /></div>
+      <div id="floor-list"><FloorList /></div>
+      <div id="floor-data-table"><FloorDataTable /></div>
+      <div id="floor-form"><FloorForm /></div>
+      <div id="floor-card"><FloorCard /></div>
+      <div id="floor-progress"><FloorProgress /></div>
+      <div id="floor-inline-message"><FloorInlineMessage /></div>
+      <div id="floor-global-message"><FloorGlobalMessage /></div>
+      <div id="floor-toast"><FloorToast /></div>
+      <div id="floor-popover"><FloorPopover /></div>
+      <div id="floor-loading"><FloorLoading /></div>
+      <div id="floor-result"><FloorResult /></div>
+      <AppBottomNav />
+    </div>
+    <RightAnchorNav :items="anchorItems" />
   </div>
 </template>
 
@@ -87,6 +131,17 @@ import AppBottomNav from '@/components/AppBottomNav.vue'
   min-height: 100vh;
   background: var(--o-color-fill1);
   display: flex;
+  position: relative;
+}
+
+.component-test-content {
+  flex: 1;
+  display: flex;
   flex-direction: column;
+  padding-right: 200px;
+
+  @include respond('<=pad') {
+    padding-right: 0;
+  }
 }
 </style>

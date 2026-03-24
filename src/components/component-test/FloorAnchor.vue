@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 设计稿 ID：95:2513, 5:7968（Pixso item-id，锚点）
-import { OAnchor, OAnchorItem } from '@opensig/opendesign'
+import { OAnchor, OAnchorItem, OScroller } from '@opensig/opendesign'
 import AppSection from '@/components/AppSection.vue'
 </script>
 
@@ -28,11 +28,13 @@ import AppSection from '@/components/AppSection.vue'
             <OAnchorItem href="#h-section-2" title="一级锚点 (选中)" />
             <OAnchorItem href="#h-section-3" title="一级锚点" />
           </OAnchor>
-          <div class="h-content">
-            <div id="h-section-1" class="h-target">区块一</div>
-            <div id="h-section-2" class="h-target h-target--selected">区块二</div>
-            <div id="h-section-3" class="h-target">区块三</div>
-          </div>
+          <OScroller class="h-scroller" show-type="always" :disabled-x="true">
+            <div class="h-content">
+              <div id="h-section-1" class="h-target">区块一</div>
+              <div id="h-section-2" class="h-target h-target--selected">区块二</div>
+              <div id="h-section-3" class="h-target">区块三</div>
+            </div>
+          </OScroller>
         </div>
       </div>
 
@@ -54,11 +56,13 @@ import AppSection from '@/components/AppSection.vue'
             <OAnchorItem href="#hd-section-2" title="一级锚点 (选中)" />
             <OAnchorItem href="#hd-section-3" title="一级锚点" />
           </OAnchor>
-          <div class="h-content">
-            <div id="hd-section-1" class="h-target">区块一</div>
-            <div id="hd-section-2" class="h-target h-target--selected">区块二</div>
-            <div id="hd-section-3" class="h-target">区块三</div>
-          </div>
+          <OScroller class="h-scroller" show-type="always" :disabled-x="true">
+            <div class="h-content">
+              <div id="hd-section-1" class="h-target">区块一</div>
+              <div id="hd-section-2" class="h-target h-target--selected">区块二</div>
+              <div id="hd-section-3" class="h-target">区块三</div>
+            </div>
+          </OScroller>
         </div>
       </div>
 
@@ -73,7 +77,12 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Medium · Level1</div>
-              <div class="v-scroll-wrap" id="v-m-l1-wrap">
+              <OScroller
+                class="v-scroll-wrap"
+                show-type="always"
+                :disabled-x="true"
+                id="v-m-l1-wrap"
+              >
                 <OAnchor
                   layout="v"
                   size="medium"
@@ -94,7 +103,7 @@ import AppSection from '@/components/AppSection.vue'
                   <div id="v-m-l1-s4" class="v-target">一级锚点区块</div>
                   <div id="v-m-l1-s5" class="v-target">一级锚点区块</div>
                 </div>
-              </div>
+              </OScroller>
             </div>
           </div>
 
@@ -102,7 +111,12 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Medium · Level1 + Level2</div>
-              <div class="v-scroll-wrap" id="v-m-l2-wrap">
+              <OScroller
+                class="v-scroll-wrap"
+                show-type="always"
+                :disabled-x="true"
+                id="v-m-l2-wrap"
+              >
                 <OAnchor
                   layout="v"
                   size="medium"
@@ -130,7 +144,7 @@ import AppSection from '@/components/AppSection.vue'
                   <div id="v-m-l2-s4" class="v-target">一级锚点区块 4</div>
                   <div id="v-m-l2-s5" class="v-target">一级锚点区块 5</div>
                 </div>
-              </div>
+              </OScroller>
             </div>
           </div>
 
@@ -138,7 +152,12 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Small · Level1</div>
-              <div class="v-scroll-wrap" id="v-s-l1-wrap">
+              <OScroller
+                class="v-scroll-wrap"
+                show-type="always"
+                :disabled-x="true"
+                id="v-s-l1-wrap"
+              >
                 <OAnchor
                   layout="v"
                   size="small"
@@ -159,7 +178,7 @@ import AppSection from '@/components/AppSection.vue'
                   <div id="v-s-l1-s4" class="v-target">一级锚点区块</div>
                   <div id="v-s-l1-s5" class="v-target">一级锚点区块</div>
                 </div>
-              </div>
+              </OScroller>
             </div>
           </div>
 
@@ -167,7 +186,12 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Small · Level1 + Level2</div>
-              <div class="v-scroll-wrap" id="v-s-l2-wrap">
+              <OScroller
+                class="v-scroll-wrap"
+                show-type="always"
+                :disabled-x="true"
+                id="v-s-l2-wrap"
+              >
                 <OAnchor
                   layout="v"
                   size="small"
@@ -193,7 +217,7 @@ import AppSection from '@/components/AppSection.vue'
                   <div id="v-s-l2-s2-4" class="v-target">子区块 2-4</div>
                   <div id="v-s-l2-s3" class="v-target">一级锚点区块</div>
                 </div>
-              </div>
+              </OScroller>
             </div>
           </div>
         </div>
@@ -242,11 +266,17 @@ import AppSection from '@/components/AppSection.vue'
 
 // ---- 水平锚点演示容器 ----
 .anchor-scroll-wrap {
-  height: 200px;
-  overflow-y: auto;
   background: var(--o-color-fill1);
   border-radius: var(--o-radius-m);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--o-r-gap-3);
+}
+
+.h-scroller {
+  flex: 1;
+  min-height: 0;
 }
 
 .h-content {
@@ -309,8 +339,7 @@ import AppSection from '@/components/AppSection.vue'
 .v-scroll-wrap {
   display: flex;
   gap: var(--o-r-gap-4);
-  max-height: 320px;
-  overflow-y: auto;
+  height: 320px;
   position: relative;
 
   :deep(.o-anchor-v) {
@@ -326,7 +355,7 @@ import AppSection from '@/components/AppSection.vue'
 }
 
 .v-target {
-  height: 80px;
+  height: 160px;
   display: flex;
   align-items: center;
   padding-left: var(--o-r-gap-3);
