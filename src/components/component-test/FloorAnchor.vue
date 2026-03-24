@@ -260,6 +260,7 @@ import AppSection from '@/components/AppSection.vue'
   display: flex;
   flex-direction: column;
   gap: var(--o-r-gap-3);
+  height: 200px;
 }
 
 .h-scroller {
@@ -293,12 +294,12 @@ import AppSection from '@/components/AppSection.vue'
 }
 
 .anchor-v-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--o-r-gap-5);
-  align-items: flex-start;
 
   @include respond('<=pad') {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 }
 

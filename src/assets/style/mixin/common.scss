@@ -2,7 +2,7 @@
 
 // 暗色模式包装器
 @mixin in-dark {
-  [data-o-theme='e.dark'] & {
+  [data-o-theme$='.dark'] & {
     @content;
   }
 }

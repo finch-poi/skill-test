@@ -1,12 +1,7 @@
 <script setup lang="ts">
 // 设计稿 ID：29:5103, 103:3564, 103:3535, 5:10948（Pixso item-id，下拉按钮）
 import { ref } from 'vue'
-import {
-  ODropdown,
-  ODropdownItem,
-  OButton,
-  OIconChevronDown,
-} from '@opensig/opendesign'
+import { ODropdown, ODropdownItem, OButton, OIconChevronDown } from '@opensig/opendesign'
 import AppSection from '@/components/AppSection.vue'
 
 // 强调下拉 visible states
@@ -41,7 +36,6 @@ const visibleTextSDark = ref(false)
     :header-justify-center="false"
   >
     <div class="floor-body">
-
       <!-- ===== 亮色主题 ===== -->
       <div class="theme-section" data-testid="dropdown-row-light">
         <div class="theme-label">Light</div>
@@ -119,7 +113,7 @@ const visibleTextSDark = ref(false)
             trigger="click-outclick"
             data-testid="dropdown-normal-l-light"
           >
-            <OButton variant="outline" :size="'large'" round="pill">
+            <OButton variant="outline" color="primary" :size="'large'" round="pill">
               普通下拉
               <template #suffix>
                 <OIconChevronDown :class="{ 'icon-rotate': visibleNormalL }" />
@@ -138,7 +132,7 @@ const visibleTextSDark = ref(false)
             trigger="click-outclick"
             data-testid="dropdown-normal-m-light"
           >
-            <OButton variant="outline" :size="'medium'" round="pill">
+            <OButton variant="outline" color="primary" :size="'medium'" round="pill">
               普通下拉
               <template #suffix>
                 <OIconChevronDown :class="{ 'icon-rotate': visibleNormalM }" />
@@ -157,7 +151,7 @@ const visibleTextSDark = ref(false)
             trigger="click-outclick"
             data-testid="dropdown-normal-s-light"
           >
-            <OButton variant="outline" :size="'small'" round="pill">
+            <OButton variant="outline" color="primary" :size="'small'" round="pill">
               普通下拉
               <template #suffix>
                 <OIconChevronDown :class="{ 'icon-rotate': visibleNormalS }" />
@@ -307,7 +301,7 @@ const visibleTextSDark = ref(false)
             trigger="click-outclick"
             data-testid="dropdown-normal-l-dark"
           >
-            <OButton variant="outline" :size="'large'" round="pill">
+            <OButton variant="outline" color="primary" :size="'large'" round="pill">
               普通下拉
               <template #suffix>
                 <OIconChevronDown :class="{ 'icon-rotate': visibleNormalLDark }" />
@@ -325,7 +319,7 @@ const visibleTextSDark = ref(false)
             trigger="click-outclick"
             data-testid="dropdown-normal-m-dark"
           >
-            <OButton variant="outline" :size="'medium'" round="pill">
+            <OButton variant="outline" color="primary" :size="'medium'" round="pill">
               普通下拉
               <template #suffix>
                 <OIconChevronDown :class="{ 'icon-rotate': visibleNormalMDark }" />
@@ -343,7 +337,7 @@ const visibleTextSDark = ref(false)
             trigger="click-outclick"
             data-testid="dropdown-normal-s-dark"
           >
-            <OButton variant="outline" :size="'small'" round="pill">
+            <OButton variant="outline" color="primary" :size="'small'" round="pill">
               普通下拉
               <template #suffix>
                 <OIconChevronDown :class="{ 'icon-rotate': visibleNormalSDark }" />

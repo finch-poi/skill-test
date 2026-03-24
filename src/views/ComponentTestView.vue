@@ -38,31 +38,10 @@ import FloorLoading from '@/components/component-test/FloorLoading.vue'
 import FloorResult from '@/components/component-test/FloorResult.vue'
 import AppBottomNav from '@/components/AppBottomNav.vue'
 import { OAnchor, OAnchorItem, OButton } from '@opensig/opendesign'
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 
 import '@opensig/opendesign-token/themes/a.light.token.css'
 import '@opensig/opendesign-token/themes/a.dark.token.css'
-
-const scrollToHash = () => {
-  const hash = window.location.hash.slice(1)
-  if (hash) {
-    nextTick(() => {
-      const el = document.getElementById(hash)
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
-      }
-    })
-  }
-}
-
-onMounted(() => {
-  scrollToHash()
-  window.addEventListener('hashchange', scrollToHash)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('hashchange', scrollToHash)
-})
 
 const anchorItems = [
   { id: 'floor-menu', title: 'Menu 菜单' },
@@ -115,6 +94,16 @@ const originalTheme = ref('')
 onMounted(() => {
   originalTheme.value = document.documentElement.getAttribute('data-o-theme') || 'e.light'
   document.documentElement.setAttribute('data-o-theme', 'a.light')
+
+  nextTick(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash) {
+      const el = document.getElementById(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+  })
 })
 
 onUnmounted(() => {
@@ -191,13 +180,7 @@ onUnmounted(() => {
         </OButton>
       </div>
       <div v-if="!collapsed" class="anchor-body">
-        <OAnchor
-          layout="v"
-          size="small"
-          container="#component-test-page"
-          :target-offset="20"
-          class="right-anchor-list"
-        >
+        <OAnchor layout="v" size="small" :target-offset="20" class="right-anchor-list">
           <OAnchorItem
             v-for="item in anchorItems"
             :key="item.id"
