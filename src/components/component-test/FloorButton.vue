@@ -707,46 +707,21 @@ function triggerLoading() {
 
 // 覆盖按钮样式以匹配设计稿
 // 设计稿强调按钮背景 #202329，禁用背景 #D1D6DB
-:deep(.o-btn-solid.o-btn-normal) {
-  background: #202329 !important;
-  border-color: #202329 !important;
-  color: #fff !important;
-
-  &.o-btn-disabled {
-    background: #D1D6DB !important;
-    border-color: #D1D6DB !important;
-    color: rgba(255, 255, 255, 0.4) !important;
-  }
-}
-
 // 普通按钮(Outline) - 边框 #0052CC, hover 背景 #F0F5FF
 :deep(.o-btn-outline.o-btn-normal) {
-  border-color: #0052CC !important;
-  color: #0052CC !important;
+  border-color: #0052cc !important;
+  color: #0052cc !important;
 
   &:hover {
-    background: #F0F5FF !important;
-    border-color: #0052CC !important;
-    color: #0052CC !important;
+    background: #f0f5ff !important;
+    border-color: #0052cc !important;
+    color: #0052cc !important;
   }
 
   &.o-btn-disabled {
-    border-color: #D1D6DB !important;
+    border-color: #d1d6db !important;
     color: rgba(0, 82, 204, 0.4) !important;
     background: transparent !important;
-  }
-}
-
-// Dark 主题下强调按钮
-.theme-section--dark :deep(.o-btn-solid.o-btn-normal) {
-  background: #fff !important;
-  border-color: #fff !important;
-  color: #202329 !important;
-
-  &.o-btn-disabled {
-    background: #505458 !important;
-    border-color: #505458 !important;
-    color: rgba(0, 0, 0, 0.4) !important;
   }
 }
 
@@ -764,20 +739,6 @@ function triggerLoading() {
   &.o-btn-disabled {
     border-color: #505458 !important;
     color: rgba(255, 255, 255, 0.4) !important;
-  }
-}
-}
-
-// Dark 主题下强调按钮
-.theme-section--dark :deep(.o-btn-solid.o-btn-normal) {
-  background: #fff !important;
-  border-color: #fff !important;
-  color: #202329 !important;
-
-  &.o-btn-disabled {
-    background: #505458 !important;
-    border-color: #505458 !important;
-    color: rgba(0, 0, 0, 0.4) !important;
   }
 }
 
