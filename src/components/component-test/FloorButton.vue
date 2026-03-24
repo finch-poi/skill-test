@@ -30,7 +30,6 @@ function triggerLoading() {
     :header-justify-center="false"
   >
     <div class="floor-body">
-
       <!-- ===== 亮色主题 ===== -->
       <div class="theme-section" data-testid="button-row-light">
         <div class="theme-label">Light</div>
@@ -40,12 +39,25 @@ function triggerLoading() {
           <div class="group-title">强调按钮（variant="solid" color="normal"）</div>
           <div class="group-label">L 尺寸</div>
           <div class="btn-row" data-testid="emphasis-light-large">
-            <OButton variant="solid" color="normal" size="large" round="pill" data-testid="emphasis-light-l-enabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="large"
+              round="pill"
+              data-testid="emphasis-light-l-enabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="solid" color="normal" size="large" round="pill" disabled data-testid="emphasis-light-l-disabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="large"
+              round="pill"
+              disabled
+              data-testid="emphasis-light-l-disabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
@@ -54,12 +66,25 @@ function triggerLoading() {
 
           <div class="group-label">M 尺寸</div>
           <div class="btn-row" data-testid="emphasis-light-medium">
-            <OButton variant="solid" color="normal" size="medium" round="pill" data-testid="emphasis-light-m-enabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="medium"
+              round="pill"
+              data-testid="emphasis-light-m-enabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="solid" color="normal" size="medium" round="pill" disabled data-testid="emphasis-light-m-disabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="medium"
+              round="pill"
+              disabled
+              data-testid="emphasis-light-m-disabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
@@ -68,12 +93,25 @@ function triggerLoading() {
 
           <div class="group-label">S 尺寸</div>
           <div class="btn-row" data-testid="emphasis-light-small">
-            <OButton variant="solid" color="normal" size="small" round="pill" data-testid="emphasis-light-s-enabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="small"
+              round="pill"
+              data-testid="emphasis-light-s-enabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="solid" color="normal" size="small" round="pill" disabled data-testid="emphasis-light-s-disabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="small"
+              round="pill"
+              disabled
+              data-testid="emphasis-light-s-disabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
@@ -86,12 +124,25 @@ function triggerLoading() {
           <div class="group-title">普通按钮（variant="outline"）</div>
           <div class="group-label">L 尺寸</div>
           <div class="btn-row" data-testid="outline-light-large">
-            <OButton variant="outline" color="normal" size="large" round="pill" data-testid="outline-light-l-enabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="large"
+              round="pill"
+              data-testid="outline-light-l-enabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="large" round="pill" disabled data-testid="outline-light-l-disabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="large"
+              round="pill"
+              disabled
+              data-testid="outline-light-l-disabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
@@ -100,12 +151,25 @@ function triggerLoading() {
 
           <div class="group-label">M 尺寸</div>
           <div class="btn-row" data-testid="outline-light-medium">
-            <OButton variant="outline" color="normal" size="medium" round="pill" data-testid="outline-light-m-enabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="medium"
+              round="pill"
+              data-testid="outline-light-m-enabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="medium" round="pill" disabled data-testid="outline-light-m-disabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="medium"
+              round="pill"
+              disabled
+              data-testid="outline-light-m-disabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
@@ -114,12 +178,25 @@ function triggerLoading() {
 
           <div class="group-label">S 尺寸</div>
           <div class="btn-row" data-testid="outline-light-small">
-            <OButton variant="outline" color="normal" size="small" round="pill" data-testid="outline-light-s-enabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="small"
+              round="pill"
+              data-testid="outline-light-s-enabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="small" round="pill" disabled data-testid="outline-light-s-disabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="small"
+              round="pill"
+              disabled
+              data-testid="outline-light-s-disabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
@@ -137,7 +214,13 @@ function triggerLoading() {
               文字按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="normal" size="large" disabled data-testid="text-light-l-disabled">
+            <OButton
+              variant="text"
+              color="normal"
+              size="large"
+              disabled
+              data-testid="text-light-l-disabled"
+            >
               <template #icon><OIconFilter /></template>
               文字按钮
               <template #suffix><OIconChevronRight /></template>
@@ -147,7 +230,13 @@ function triggerLoading() {
               文字按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="normal" size="medium" disabled data-testid="text-light-m-disabled">
+            <OButton
+              variant="text"
+              color="normal"
+              size="medium"
+              disabled
+              data-testid="text-light-m-disabled"
+            >
               <template #icon><OIconFilter /></template>
               文字按钮
               <template #suffix><OIconChevronRight /></template>
@@ -155,7 +244,13 @@ function triggerLoading() {
             <OButton variant="text" color="normal" size="small" data-testid="text-light-s-enabled">
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="normal" size="small" disabled data-testid="text-light-s-disabled">
+            <OButton
+              variant="text"
+              color="normal"
+              size="small"
+              disabled
+              data-testid="text-light-s-disabled"
+            >
               <template #suffix><OIconChevronRight /></template>
             </OButton>
           </div>
@@ -170,15 +265,32 @@ function triggerLoading() {
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="primary" size="large" disabled data-testid="link-light-l-disabled">
+            <OButton
+              variant="text"
+              color="primary"
+              size="large"
+              disabled
+              data-testid="link-light-l-disabled"
+            >
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="primary" size="medium" data-testid="link-light-m-enabled">
+            <OButton
+              variant="text"
+              color="primary"
+              size="medium"
+              data-testid="link-light-m-enabled"
+            >
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="primary" size="medium" disabled data-testid="link-light-m-disabled">
+            <OButton
+              variant="text"
+              color="primary"
+              size="medium"
+              disabled
+              data-testid="link-light-m-disabled"
+            >
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
@@ -186,7 +298,13 @@ function triggerLoading() {
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="primary" size="small" disabled data-testid="link-light-s-disabled">
+            <OButton
+              variant="text"
+              color="primary"
+              size="small"
+              disabled
+              data-testid="link-light-s-disabled"
+            >
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
@@ -197,23 +315,59 @@ function triggerLoading() {
         <div class="group-card">
           <div class="group-title">颜色变体（color variants）</div>
           <div class="btn-row" data-testid="color-variants-light">
-            <OButton variant="solid" color="primary" size="medium" round="pill" data-testid="color-primary-solid">
+            <OButton
+              variant="solid"
+              color="primary"
+              size="medium"
+              round="pill"
+              data-testid="color-primary-solid"
+            >
               <template #icon><OIconSearch /></template>
               Primary Solid
             </OButton>
-            <OButton variant="outline" color="primary" size="medium" round="pill" data-testid="color-primary-outline">
+            <OButton
+              variant="outline"
+              color="primary"
+              size="medium"
+              round="pill"
+              data-testid="color-primary-outline"
+            >
               Primary Outline
             </OButton>
-            <OButton variant="solid" color="success" size="medium" round="pill" data-testid="color-success">
+            <OButton
+              variant="solid"
+              color="success"
+              size="medium"
+              round="pill"
+              data-testid="color-success"
+            >
               Success
             </OButton>
-            <OButton variant="solid" color="warning" size="medium" round="pill" data-testid="color-warning">
+            <OButton
+              variant="solid"
+              color="warning"
+              size="medium"
+              round="pill"
+              data-testid="color-warning"
+            >
               Warning
             </OButton>
-            <OButton variant="solid" color="danger" size="medium" round="pill" data-testid="color-danger">
+            <OButton
+              variant="solid"
+              color="danger"
+              size="medium"
+              round="pill"
+              data-testid="color-danger"
+            >
               Danger
             </OButton>
-            <OButton variant="solid" color="brand" size="medium" round="pill" data-testid="color-brand">
+            <OButton
+              variant="solid"
+              color="brand"
+              size="medium"
+              round="pill"
+              data-testid="color-brand"
+            >
               Brand
             </OButton>
           </div>
@@ -235,13 +389,39 @@ function triggerLoading() {
               <template #icon><OIconDownload /></template>
               点击加载
             </OButton>
-            <OButton variant="outline" color="normal" size="medium" :icon="OIconEdit" data-testid="icon-only-btn" />
-            <OButton variant="outline" color="normal" size="medium" :icon="OIconDelete" data-testid="icon-only-danger" />
-            <OButton variant="solid" color="primary" size="large" round="pill" data-testid="suffix-btn">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="medium"
+              :icon="OIconEdit"
+              data-testid="icon-only-btn"
+            />
+            <OButton
+              variant="outline"
+              color="normal"
+              size="medium"
+              :icon="OIconDelete"
+              data-testid="icon-only-danger"
+            />
+            <OButton
+              variant="solid"
+              color="primary"
+              size="large"
+              round="pill"
+              data-testid="suffix-btn"
+            >
               下拉选项
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="solid" color="normal" size="medium" round="pill" :loading="true" disabled data-testid="loading-disabled-btn">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="medium"
+              round="pill"
+              :loading="true"
+              disabled
+              data-testid="loading-disabled-btn"
+            >
               加载中
             </OButton>
           </div>
@@ -249,7 +429,11 @@ function triggerLoading() {
       </div>
 
       <!-- ===== 暗色主题 ===== -->
-      <div class="theme-section theme-section--dark" data-o-theme="e.dark" data-testid="button-row-dark">
+      <div
+        class="theme-section theme-section--dark"
+        data-o-theme="e.dark"
+        data-testid="button-row-dark"
+      >
         <div class="theme-label">Dark</div>
 
         <!-- 强调按钮 Dark -->
@@ -257,12 +441,25 @@ function triggerLoading() {
           <div class="group-title">强调按钮（variant="solid"）</div>
           <div class="group-label">L 尺寸</div>
           <div class="btn-row" data-testid="emphasis-dark-large">
-            <OButton variant="solid" color="normal" size="large" round="pill" data-testid="emphasis-dark-l-enabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="large"
+              round="pill"
+              data-testid="emphasis-dark-l-enabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="solid" color="normal" size="large" round="pill" disabled data-testid="emphasis-dark-l-disabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="large"
+              round="pill"
+              disabled
+              data-testid="emphasis-dark-l-disabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
@@ -271,12 +468,25 @@ function triggerLoading() {
 
           <div class="group-label">M 尺寸</div>
           <div class="btn-row" data-testid="emphasis-dark-medium">
-            <OButton variant="solid" color="normal" size="medium" round="pill" data-testid="emphasis-dark-m-enabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="medium"
+              round="pill"
+              data-testid="emphasis-dark-m-enabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="solid" color="normal" size="medium" round="pill" disabled data-testid="emphasis-dark-m-disabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="medium"
+              round="pill"
+              disabled
+              data-testid="emphasis-dark-m-disabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
@@ -285,12 +495,25 @@ function triggerLoading() {
 
           <div class="group-label">S 尺寸</div>
           <div class="btn-row" data-testid="emphasis-dark-small">
-            <OButton variant="solid" color="normal" size="small" round="pill" data-testid="emphasis-dark-s-enabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="small"
+              round="pill"
+              data-testid="emphasis-dark-s-enabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="solid" color="normal" size="small" round="pill" disabled data-testid="emphasis-dark-s-disabled">
+            <OButton
+              variant="solid"
+              color="normal"
+              size="small"
+              round="pill"
+              disabled
+              data-testid="emphasis-dark-s-disabled"
+            >
               <template #icon><OIconFilter /></template>
               强调按钮
               <template #suffix><OIconChevronRight /></template>
@@ -302,32 +525,71 @@ function triggerLoading() {
         <div class="group-card group-card--dark">
           <div class="group-title">普通按钮（variant="outline"）</div>
           <div class="btn-row" data-testid="outline-dark-all">
-            <OButton variant="outline" color="normal" size="large" round="pill" data-testid="outline-dark-l-enabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="large"
+              round="pill"
+              data-testid="outline-dark-l-enabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="large" round="pill" disabled data-testid="outline-dark-l-disabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="large"
+              round="pill"
+              disabled
+              data-testid="outline-dark-l-disabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="medium" round="pill" data-testid="outline-dark-m-enabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="medium"
+              round="pill"
+              data-testid="outline-dark-m-enabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="medium" round="pill" disabled data-testid="outline-dark-m-disabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="medium"
+              round="pill"
+              disabled
+              data-testid="outline-dark-m-disabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="small" round="pill" data-testid="outline-dark-s-enabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="small"
+              round="pill"
+              data-testid="outline-dark-s-enabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="outline" color="normal" size="small" round="pill" disabled data-testid="outline-dark-s-disabled">
+            <OButton
+              variant="outline"
+              color="normal"
+              size="small"
+              round="pill"
+              disabled
+              data-testid="outline-dark-s-disabled"
+            >
               <template #icon><OIconFilter /></template>
               普通按钮
               <template #suffix><OIconChevronRight /></template>
@@ -344,7 +606,13 @@ function triggerLoading() {
               文字按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="normal" size="large" disabled data-testid="text-dark-l-disabled">
+            <OButton
+              variant="text"
+              color="normal"
+              size="large"
+              disabled
+              data-testid="text-dark-l-disabled"
+            >
               <template #icon><OIconFilter /></template>
               文字按钮
               <template #suffix><OIconChevronRight /></template>
@@ -354,12 +622,24 @@ function triggerLoading() {
               文字按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="normal" size="medium" disabled data-testid="text-dark-m-disabled">
+            <OButton
+              variant="text"
+              color="normal"
+              size="medium"
+              disabled
+              data-testid="text-dark-m-disabled"
+            >
               <template #icon><OIconFilter /></template>
               文字按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="normal" size="small" disabled data-testid="text-dark-s-disabled">
+            <OButton
+              variant="text"
+              color="normal"
+              size="small"
+              disabled
+              data-testid="text-dark-s-disabled"
+            >
               <template #suffix><OIconChevronRight /></template>
             </OButton>
           </div>
@@ -373,7 +653,13 @@ function triggerLoading() {
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="primary" size="large" disabled data-testid="link-dark-l-disabled">
+            <OButton
+              variant="text"
+              color="primary"
+              size="large"
+              disabled
+              data-testid="link-dark-l-disabled"
+            >
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
@@ -381,7 +667,13 @@ function triggerLoading() {
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="primary" size="medium" disabled data-testid="link-dark-m-disabled">
+            <OButton
+              variant="text"
+              color="primary"
+              size="medium"
+              disabled
+              data-testid="link-dark-m-disabled"
+            >
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
@@ -389,14 +681,19 @@ function triggerLoading() {
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
-            <OButton variant="text" color="primary" size="small" disabled data-testid="link-dark-s-disabled">
+            <OButton
+              variant="text"
+              color="primary"
+              size="small"
+              disabled
+              data-testid="link-dark-s-disabled"
+            >
               链接按钮
               <template #suffix><OIconChevronRight /></template>
             </OButton>
           </div>
         </div>
       </div>
-
     </div>
   </AppSection>
 </template>
@@ -406,6 +703,33 @@ function triggerLoading() {
   display: flex;
   flex-direction: column;
   gap: var(--o-r-gap-6);
+}
+
+// 覆盖按钮样式以匹配设计稿
+// 设计稿强调按钮背景 #202329，禁用背景 #D1D6DB
+:deep(.o-btn-solid.o-btn-normal) {
+  background: #202329 !important;
+  border-color: #202329 !important;
+  color: #fff !important;
+
+  &.o-btn-disabled {
+    background: #d1d6db !important;
+    border-color: #d1d6db !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
+}
+
+// Dark 主题下强调按钮
+.theme-section--dark :deep(.o-btn-solid.o-btn-normal) {
+  background: #fff !important;
+  border-color: #fff !important;
+  color: #202329 !important;
+
+  &.o-btn-disabled {
+    background: #505458 !important;
+    border-color: #505458 !important;
+    color: rgba(0, 0, 0, 0.4) !important;
+  }
 }
 
 // ---- 主题区块 ----

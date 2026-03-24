@@ -77,12 +77,7 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Medium · Level1</div>
-              <OScroller
-                class="v-scroll-wrap"
-                show-type="always"
-                :disabled-x="true"
-                id="v-m-l1-wrap"
-              >
+              <div class="v-scroll-wrap" id="v-m-l1-wrap">
                 <OAnchor
                   layout="v"
                   size="medium"
@@ -96,14 +91,16 @@ import AppSection from '@/components/AppSection.vue'
                   <OAnchorItem href="#v-m-l1-s4" title="一级锚点" />
                   <OAnchorItem href="#v-m-l1-s5" title="一级锚点" />
                 </OAnchor>
-                <div class="v-content">
-                  <div id="v-m-l1-s1" class="v-target">一级锚点区块</div>
-                  <div id="v-m-l1-s2" class="v-target">一级锚点区块</div>
-                  <div id="v-m-l1-s3" class="v-target">一级锚点区块</div>
-                  <div id="v-m-l1-s4" class="v-target">一级锚点区块</div>
-                  <div id="v-m-l1-s5" class="v-target">一级锚点区块</div>
-                </div>
-              </OScroller>
+                <OScroller class="v-scroller" show-type="always" :disabled-x="true">
+                  <div class="v-content">
+                    <div id="v-m-l1-s1" class="v-target">一级锚点区块</div>
+                    <div id="v-m-l1-s2" class="v-target">一级锚点区块</div>
+                    <div id="v-m-l1-s3" class="v-target">一级锚点区块</div>
+                    <div id="v-m-l1-s4" class="v-target">一级锚点区块</div>
+                    <div id="v-m-l1-s5" class="v-target">一级锚点区块</div>
+                  </div>
+                </OScroller>
+              </div>
             </div>
           </div>
 
@@ -111,12 +108,7 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Medium · Level1 + Level2</div>
-              <OScroller
-                class="v-scroll-wrap"
-                show-type="always"
-                :disabled-x="true"
-                id="v-m-l2-wrap"
-              >
+              <div class="v-scroll-wrap" id="v-m-l2-wrap">
                 <OAnchor
                   layout="v"
                   size="medium"
@@ -134,17 +126,19 @@ import AppSection from '@/components/AppSection.vue'
                   <OAnchorItem href="#v-m-l2-s4" title="一级锚点 (选中)" />
                   <OAnchorItem href="#v-m-l2-s5" title="一级锚点" />
                 </OAnchor>
-                <div class="v-content">
-                  <div id="v-m-l2-s1" class="v-target">二级锚点区块 1</div>
-                  <div id="v-m-l2-s2" class="v-target">二级锚点区块 2</div>
-                  <div id="v-m-l2-s3" class="v-target">一级锚点区块 3</div>
-                  <div id="v-m-l2-s3-1" class="v-target">子区块 3-1</div>
-                  <div id="v-m-l2-s3-2" class="v-target">子区块 3-2</div>
-                  <div id="v-m-l2-s3-3" class="v-target">子区块 3-3</div>
-                  <div id="v-m-l2-s4" class="v-target">一级锚点区块 4</div>
-                  <div id="v-m-l2-s5" class="v-target">一级锚点区块 5</div>
-                </div>
-              </OScroller>
+                <OScroller class="v-scroller" show-type="always" :disabled-x="true">
+                  <div class="v-content">
+                    <div id="v-m-l2-s1" class="v-target">二级锚点区块 1</div>
+                    <div id="v-m-l2-s2" class="v-target">二级锚点区块 2</div>
+                    <div id="v-m-l2-s3" class="v-target">一级锚点区块 3</div>
+                    <div id="v-m-l2-s3-1" class="v-target">子区块 3-1</div>
+                    <div id="v-m-l2-s3-2" class="v-target">子区块 3-2</div>
+                    <div id="v-m-l2-s3-3" class="v-target">子区块 3-3</div>
+                    <div id="v-m-l2-s4" class="v-target">一级锚点区块 4</div>
+                    <div id="v-m-l2-s5" class="v-target">一级锚点区块 5</div>
+                  </div>
+                </OScroller>
+              </div>
             </div>
           </div>
 
@@ -152,12 +146,7 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Small · Level1</div>
-              <OScroller
-                class="v-scroll-wrap"
-                show-type="always"
-                :disabled-x="true"
-                id="v-s-l1-wrap"
-              >
+              <div class="v-scroll-wrap" id="v-s-l1-wrap">
                 <OAnchor
                   layout="v"
                   size="small"
@@ -171,14 +160,16 @@ import AppSection from '@/components/AppSection.vue'
                   <OAnchorItem href="#v-s-l1-s4" title="一级锚点" />
                   <OAnchorItem href="#v-s-l1-s5" title="一级锚点" />
                 </OAnchor>
-                <div class="v-content">
-                  <div id="v-s-l1-s1" class="v-target">一级锚点区块</div>
-                  <div id="v-s-l1-s2" class="v-target">一级锚点区块</div>
-                  <div id="v-s-l1-s3" class="v-target">一级锚点区块</div>
-                  <div id="v-s-l1-s4" class="v-target">一级锚点区块</div>
-                  <div id="v-s-l1-s5" class="v-target">一级锚点区块</div>
-                </div>
-              </OScroller>
+                <OScroller class="v-scroller" show-type="always" :disabled-x="true">
+                  <div class="v-content">
+                    <div id="v-s-l1-s1" class="v-target">一级锚点区块</div>
+                    <div id="v-s-l1-s2" class="v-target">一级锚点区块</div>
+                    <div id="v-s-l1-s3" class="v-target">一级锚点区块</div>
+                    <div id="v-s-l1-s4" class="v-target">一级锚点区块</div>
+                    <div id="v-s-l1-s5" class="v-target">一级锚点区块</div>
+                  </div>
+                </OScroller>
+              </div>
             </div>
           </div>
 
@@ -186,12 +177,7 @@ import AppSection from '@/components/AppSection.vue'
           <div class="anchor-col">
             <div class="anchor-card">
               <div class="anchor-label">Small · Level1 + Level2</div>
-              <OScroller
-                class="v-scroll-wrap"
-                show-type="always"
-                :disabled-x="true"
-                id="v-s-l2-wrap"
-              >
+              <div class="v-scroll-wrap" id="v-s-l2-wrap">
                 <OAnchor
                   layout="v"
                   size="small"
@@ -208,16 +194,18 @@ import AppSection from '@/components/AppSection.vue'
                   </OAnchorItem>
                   <OAnchorItem href="#v-s-l2-s3" title="一级锚点" />
                 </OAnchor>
-                <div class="v-content">
-                  <div id="v-s-l2-s1" class="v-target">二级锚点区块</div>
-                  <div id="v-s-l2-s2" class="v-target">一级锚点区块</div>
-                  <div id="v-s-l2-s2-1" class="v-target">子区块 2-1</div>
-                  <div id="v-s-l2-s2-2" class="v-target">子区块 2-2</div>
-                  <div id="v-s-l2-s2-3" class="v-target">子区块 2-3</div>
-                  <div id="v-s-l2-s2-4" class="v-target">子区块 2-4</div>
-                  <div id="v-s-l2-s3" class="v-target">一级锚点区块</div>
-                </div>
-              </OScroller>
+                <OScroller class="v-scroller" show-type="always" :disabled-x="true">
+                  <div class="v-content">
+                    <div id="v-s-l2-s1" class="v-target">二级锚点区块</div>
+                    <div id="v-s-l2-s2" class="v-target">一级锚点区块</div>
+                    <div id="v-s-l2-s2-1" class="v-target">子区块 2-1</div>
+                    <div id="v-s-l2-s2-2" class="v-target">子区块 2-2</div>
+                    <div id="v-s-l2-s2-3" class="v-target">子区块 2-3</div>
+                    <div id="v-s-l2-s2-4" class="v-target">子区块 2-4</div>
+                    <div id="v-s-l2-s3" class="v-target">一级锚点区块</div>
+                  </div>
+                </OScroller>
+              </div>
             </div>
           </div>
         </div>
@@ -341,12 +329,11 @@ import AppSection from '@/components/AppSection.vue'
   gap: var(--o-r-gap-4);
   height: 320px;
   position: relative;
+}
 
-  :deep(.o-anchor-v) {
-    position: sticky;
-    top: 0;
-    flex-shrink: 0;
-  }
+.v-scroller {
+  flex: 1;
+  min-width: 0;
 }
 
 .v-content {

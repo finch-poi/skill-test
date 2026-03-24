@@ -37,7 +37,8 @@ import FloorPopover from '@/components/component-test/FloorPopover.vue'
 import FloorLoading from '@/components/component-test/FloorLoading.vue'
 import FloorResult from '@/components/component-test/FloorResult.vue'
 import AppBottomNav from '@/components/AppBottomNav.vue'
-import RightAnchorNav from '@/components/RightAnchorNav.vue'
+import { OAnchor, OAnchorItem, OButton } from '@opensig/opendesign'
+import { ref } from 'vue'
 
 const anchorItems = [
   { id: 'floor-menu', title: 'Menu 菜单' },
@@ -78,10 +79,17 @@ const anchorItems = [
   { id: 'floor-loading', title: 'Loading 加载' },
   { id: 'floor-result', title: 'Result 结果' },
 ]
+
+const collapsed = ref(false)
+
+const toggleCollapse = () => {
+  collapsed.value = !collapsed.value
+}
 </script>
 
 <template>
-  <div class="component-test-page">
+  <div class="component-test-page" id="component-test-page">
+    <!-- 主内容区域 -->
     <div class="component-test-content">
       <div id="floor-menu"><FloorMenu /></div>
       <div id="floor-tab"><FloorTab /></div>
@@ -122,26 +130,180 @@ const anchorItems = [
       <div id="floor-result"><FloorResult /></div>
       <AppBottomNav />
     </div>
-    <RightAnchorNav :items="anchorItems" />
+
+    <!-- 右侧锚点导航 -->
+    <div class="right-anchor-nav" :class="{ 'right-anchor-nav--collapsed': collapsed }">
+      <div class="anchor-header">
+        <span v-if="!collapsed" class="anchor-title">目录</span>
+        <OButton variant="text" size="small" class="collapse-btn" @click="toggleCollapse">
+          <template #icon>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 18l6-6-6-6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </template>
+        </OButton>
+      </div>
+      <div v-if="!collapsed" class="anchor-body">
+        <OAnchor
+          layout="v"
+          size="small"
+          container="#component-test-page"
+          :target-offset="20"
+          :change-hash="false"
+          class="right-anchor-list"
+        >
+          <OAnchorItem
+            v-for="item in anchorItems"
+            :key="item.id"
+            :href="`#${item.id}`"
+            :title="item.title"
+          />
+        </OAnchor>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .component-test-page {
+  display: flex;
   min-height: 100vh;
   background: var(--o-color-fill1);
-  display: flex;
-  position: relative;
 }
 
 .component-test-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-right: 200px;
+  min-width: 0;
+  padding: var(--o-r-gap-6);
+  padding-right: var(--o-r-gap-8);
 
   @include respond('<=pad') {
-    padding-right: 0;
+    padding: var(--o-r-gap-4);
+    padding-right: var(--o-r-gap-4);
+  }
+}
+
+.right-anchor-nav {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--o-r-gap-6);
+  height: calc(100vh - var(--o-r-gap-12));
+  max-height: calc(100vh - 80px);
+  margin: var(--o-r-gap-6) var(--o-r-gap-6) var(--o-r-gap-6) 0;
+  overflow: hidden;
+  background: var(--o-color-fill2);
+  border-radius: var(--o-radius-l);
+  box-shadow: var(--o-shadow-1);
+  border: 1px solid var(--o-color-control2-light);
+  transition:
+    width 0.3s ease,
+    margin 0.3s ease;
+  display: flex;
+  flex-direction: column;
+
+  @include respond('<=pad') {
+    display: none;
+  }
+}
+
+.right-anchor-nav--collapsed {
+  width: 48px;
+  margin-right: var(--o-r-gap-4);
+
+  .collapse-btn {
+    transform: rotate(180deg);
+  }
+
+  .anchor-header {
+    justify-content: center;
+    padding: var(--o-r-gap-3) var(--o-r-gap-2);
+  }
+
+  .anchor-body {
+    display: none;
+  }
+}
+
+.anchor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--o-r-gap-4) var(--o-r-gap-5);
+  border-bottom: 1px solid var(--o-color-control3);
+  background: linear-gradient(
+    180deg,
+    rgba(var(--o-primary-rgb, 0, 82, 204), 0.03) 0%,
+    transparent 100%
+  );
+  flex-shrink: 0;
+}
+
+.anchor-title {
+  @include text1;
+  font-weight: 600;
+  color: var(--o-color-info1);
+  letter-spacing: 0.02em;
+}
+
+.collapse-btn {
+  padding: 6px;
+  color: var(--o-color-info3);
+  transition:
+    transform 0.3s ease,
+    color 0.2s ease;
+  border-radius: var(--o-radius-s);
+
+  &:hover {
+    color: var(--o-color-primary1);
+    background: rgba(var(--o-primary-rgb, 0, 82, 204), 0.08);
+  }
+}
+
+.anchor-body {
+  padding: var(--o-r-gap-4) var(--o-r-gap-3);
+  flex: 1;
+  overflow-y: auto;
+
+  @include scrollbar;
+}
+
+.right-anchor-list {
+  :deep(.o-anchor) {
+    padding-left: var(--o-r-gap-3);
+  }
+
+  :deep(.o-anchor-item) {
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  :deep(.o-anchor-item-link) {
+    padding: var(--o-r-gap-2) var(--o-r-gap-3);
+    border-radius: var(--o-radius-s);
+    transition: all 0.2s ease;
+  }
+
+  :deep(.o-anchor-item-link:hover) {
+    background: rgba(var(--o-primary-rgb, 0, 82, 204), 0.06);
+  }
+
+  :deep(.o-anchor-item.o-anchor-item--active .o-anchor-item-link) {
+    background: rgba(var(--o-primary-rgb, 0, 82, 204), 0.1);
   }
 }
 </style>
