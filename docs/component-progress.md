@@ -30,7 +30,6 @@
 | FloorSwitch        | 开关       | 3951:22783, 3951:21028, 15:2369      | FloorSwitch.vue        | ✅   | ⬜  |
 | FloorScrollbar     | 滚动条     | 29:5181, 15:2373                     | FloorScrollbar.vue     | ✅   | ⬜  |
 | FloorToggle        | 选择块     | 15:2382                              | FloorToggle.vue        | ✅   | ⬜  |
-| FloorFloatButton   | 悬浮按钮   | 4013:86                              | FloorFloatButton.vue   | ✅   | ⬜  |
 | FloorInput         | 输入框     | 15:3997, 17:4014                     | FloorInput.vue         | ✅   | ⬜  |
 | FloorTextarea      | 文本域     | 17:2670                              | FloorTextarea.vue      | ✅   | ⬜  |
 | FloorSelect        | 下拉选择器 | 4136:1, 17:4376                      | FloorSelect.vue        | ✅   | ⬜  |

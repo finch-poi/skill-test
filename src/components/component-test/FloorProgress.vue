@@ -83,34 +83,6 @@ import AppSection from '@/components/AppSection.vue'
           </div>
         </div>
 
-        <!-- Label inside -->
-        <div class="progress-group">
-          <div class="group-label">内部文字（label-inside）</div>
-          <div class="progress-row">
-            <div class="progress-card">
-              <div class="card-label">Primary · 50%</div>
-              <OProgress
-                :percentage="50"
-                label-inside
-                :stroke-width="16"
-                color="primary"
-                data-testid="progress-line-inside-primary-light"
-              />
-            </div>
-
-            <div class="progress-card">
-              <div class="card-label">Success · 100%</div>
-              <OProgress
-                :percentage="100"
-                label-inside
-                :stroke-width="16"
-                color="success"
-                data-testid="progress-line-inside-success-light"
-              />
-            </div>
-          </div>
-        </div>
-
         <!-- Circle variant -->
         <div class="progress-group">
           <div class="group-label">环形进度条（circle）</div>
@@ -261,34 +233,6 @@ import AppSection from '@/components/AppSection.vue'
                 size="small"
                 color="success"
                 data-testid="progress-line-small-success-dark"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Label inside Dark -->
-        <div class="progress-group">
-          <div class="group-label">内部文字</div>
-          <div class="progress-row">
-            <div class="progress-card">
-              <div class="card-label">Primary · 50%</div>
-              <OProgress
-                :percentage="50"
-                label-inside
-                :stroke-width="16"
-                color="primary"
-                data-testid="progress-line-inside-primary-dark"
-              />
-            </div>
-
-            <div class="progress-card">
-              <div class="card-label">Success · 100%</div>
-              <OProgress
-                :percentage="100"
-                label-inside
-                :stroke-width="16"
-                color="success"
-                data-testid="progress-line-inside-success-dark"
               />
             </div>
           </div>

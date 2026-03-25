@@ -293,9 +293,9 @@ function resetVisible() {
 
           <div class="tag-row-label">渐变色</div>
           <div class="tag-row" data-testid="tag-op-gradient-dark">
-            <OTag size="large" round="pill" class="tag-op-gradient">标签</OTag>
-            <OTag size="medium" round="pill" class="tag-op-gradient">标签</OTag>
-            <OTag size="small" round="pill" class="tag-op-gradient">标签</OTag>
+            <OTag size="large" round="pill" class="tag-op-gradient-dark">标签</OTag>
+            <OTag size="medium" round="pill" class="tag-op-gradient-dark">标签</OTag>
+            <OTag size="small" round="pill" class="tag-op-gradient-dark">标签</OTag>
           </div>
 
           <div class="tag-row-label">自定颜色（dark 模式透明度更高）</div>
@@ -398,22 +398,20 @@ function resetVisible() {
   --tag-color: #fff;
 }
 
-// 渐变色：蓝紫渐变（DSL: rgba(46,83,250,0.15) → rgba(123,37,244,0.15) light off）
-// light 模式用 0.15 opacity，dark 模式用 0.25 opacity
+// 渐变色：蓝紫渐变
+// light 模式：DSL stop1=rgba(46,83,250,0.15) stop2=rgba(123,37,244,0.15)
+// dark  模式：DSL stop1=rgba(84,120,251,0.25) stop2=rgba(152,74,246,0.25)
+// 注意：OTag 用 background-color 不支持渐变，需直接用 background 属性覆盖（高于 .o-tag 的 specificity）
 .tag-op-gradient {
-  --tag-bg-color: transparent;
   --tag-bd-color: transparent;
   --tag-color: var(--o-color-info1);
-  position: relative;
+  background: linear-gradient(to right, rgba(46, 83, 250, 0.15), rgba(123, 37, 244, 0.15));
+}
 
-  :deep(.o-tag) {
-    background: linear-gradient(
-      to right,
-      rgba(46, 83, 250, 0.15),
-      rgba(123, 37, 244, 0.15)
-    );
-    border-color: transparent;
-  }
+.tag-op-gradient-dark {
+  --tag-bd-color: transparent;
+  --tag-color: var(--o-color-info1);
+  background: linear-gradient(to right, rgba(84, 120, 251, 0.25), rgba(152, 74, 246, 0.25));
 }
 
 // 自定颜色（light off）: rgba(46,83,250,0.15) 单色半透明蓝

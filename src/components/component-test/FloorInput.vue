@@ -1,8 +1,10 @@
 <script setup lang="ts">
 // 设计稿 ID：15:3997, 17:4014（Pixso item-id，输入框）
-import { ref } from 'vue'
+import { ref, reactive, onMounted, nextTick } from 'vue'
 import {
   OInput,
+  OForm,
+  OFormItem,
   OButton,
   OIconSearch,
   OIconClose,
@@ -15,7 +17,6 @@ const valFilled = ref('Hint')
 const valLabel = ref('')
 const valPhone = ref('')
 const valCode = ref('')
-const valError = ref('Hint')
 
 const valEmptyM = ref('')
 const valFilledM = ref('Hint')
@@ -25,10 +26,22 @@ const valFilledDark = ref('Hint')
 const valLabelDark = ref('')
 const valPhoneDark = ref('')
 const valCodeDark = ref('')
-const valErrorDark = ref('Hint')
 
 const valEmptyMDark = ref('')
 const valFilledMDark = ref('Hint')
+
+// ---- 错误状态 demo（OForm + OFormItem 驱动，不直接用 color="danger"）----
+const errorFormRef = ref()
+const errorModel = reactive({ val: '' })
+const errorFormDarkRef = ref()
+const errorModelDark = reactive({ val: '' })
+const errorRules = [{ required: true, message: '请输入正确内容' }]
+
+onMounted(async () => {
+  await nextTick()
+  errorFormRef.value?.validate()
+  errorFormDarkRef.value?.validate()
+})
 
 // ---- 搜索框示例数据 ----
 const searchL = ref('')
@@ -89,20 +102,6 @@ const searchMbActiveDark = ref('搜索')
             </div>
 
             <div class="input-card">
-              <div class="input-label">L size · Group-tittle（必填标签）</div>
-              <div class="input-with-label">
-                <span class="required-label"><span class="asterisk">*</span> Tittle</span>
-                <OInput
-                  v-model="valLabel"
-                  size="large"
-                  placeholder="Hint"
-                  round="pill"
-                  data-testid="input-l-label"
-                />
-              </div>
-            </div>
-
-            <div class="input-card">
               <div class="input-label">L size · Group-number（手机号前置）</div>
               <OInput
                 v-model="valPhone"
@@ -134,14 +133,17 @@ const searchMbActiveDark = ref('搜索')
 
             <div class="input-card">
               <div class="input-label">L size · Error（错误状态）</div>
-              <OInput
-                v-model="valError"
-                size="large"
-                placeholder="Hint"
-                round="pill"
-                color="danger"
-                data-testid="input-l-error"
-              />
+              <OForm ref="errorFormRef" :model="errorModel" class="demo-form">
+                <OFormItem field="val" :rules="errorRules">
+                  <OInput
+                    v-model="errorModel.val"
+                    size="large"
+                    placeholder="Hint"
+                    round="pill"
+                    data-testid="input-l-error"
+                  />
+                </OFormItem>
+              </OForm>
             </div>
           </div>
 
@@ -206,16 +208,17 @@ const searchMbActiveDark = ref('搜索')
 
             <div class="input-card">
               <div class="input-label">L size · Group-tittle（必填标签）</div>
-              <div class="input-with-label">
-                <span class="required-label"><span class="asterisk">*</span></span>
-                <OInput
-                  v-model="valLabelDark"
-                  size="large"
-                  placeholder="Hint"
-                  round="pill"
-                  data-testid="input-l-label-dark"
-                />
-              </div>
+              <OForm :model="{ val: valLabelDark }" class="demo-form">
+                <OFormItem field="val" required label="标签">
+                  <OInput
+                    v-model="valLabelDark"
+                    size="large"
+                    placeholder="Hint"
+                    round="pill"
+                    data-testid="input-l-label-dark"
+                  />
+                </OFormItem>
+              </OForm>
             </div>
 
             <div class="input-card">
@@ -250,14 +253,17 @@ const searchMbActiveDark = ref('搜索')
 
             <div class="input-card">
               <div class="input-label">L size · Error（错误状态）</div>
-              <OInput
-                v-model="valErrorDark"
-                size="large"
-                placeholder="Hint"
-                round="pill"
-                color="danger"
-                data-testid="input-l-error-dark"
-              />
+              <OForm ref="errorFormDarkRef" :model="errorModelDark" class="demo-form">
+                <OFormItem field="val" :rules="errorRules">
+                  <OInput
+                    v-model="errorModelDark.val"
+                    size="large"
+                    placeholder="Hint"
+                    round="pill"
+                    data-testid="input-l-error-dark"
+                  />
+                </OFormItem>
+              </OForm>
             </div>
           </div>
 
@@ -491,25 +497,6 @@ const searchMbActiveDark = ref('搜索')
   color: var(--o-color-info3);
 }
 
-// ---- 必填标签行 ----
-.input-with-label {
-  display: flex;
-  align-items: center;
-  gap: var(--o-r-gap-3);
-}
-
-.required-label {
-  @include text1;
-  color: var(--o-color-info2);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.asterisk {
-  color: var(--o-color-danger1);
-  margin-right: 2px;
-}
-
 // ---- Prepend 文本 ----
 .prepend-text {
   @include tip1;
@@ -522,5 +509,12 @@ const searchMbActiveDark = ref('搜索')
 
 .prepend-arrow {
   font-size: 0.75em;
+}
+
+// ---- 表单 demo 重置（移除 OFormItem 默认外边距）----
+.demo-form {
+  :deep(.o-form-item) {
+    margin-bottom: 0;
+  }
 }
 </style>

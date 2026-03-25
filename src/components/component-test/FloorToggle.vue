@@ -256,6 +256,7 @@ const mbChildItems = ['筛选', '筛选条件', '筛选选中中', '筛选', '�
   display: flex;
   flex-direction: column;
   gap: var(--o-r-gap-6);
+  background-color: var(--o-color-fill2);
 }
 
 // ---- 主题区块 ----

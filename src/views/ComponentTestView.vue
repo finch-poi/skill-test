@@ -12,7 +12,6 @@ import FloorCheckbox from '@/components/component-test/FloorCheckbox.vue'
 import FloorSwitch from '@/components/component-test/FloorSwitch.vue'
 import FloorScrollbar from '@/components/component-test/FloorScrollbar.vue'
 import FloorToggle from '@/components/component-test/FloorToggle.vue'
-import FloorFloatButton from '@/components/component-test/FloorFloatButton.vue'
 import FloorInput from '@/components/component-test/FloorInput.vue'
 import FloorTextarea from '@/components/component-test/FloorTextarea.vue'
 import FloorSelect from '@/components/component-test/FloorSelect.vue'
@@ -40,8 +39,6 @@ import AppBottomNav from '@/components/AppBottomNav.vue'
 import { OAnchor, OAnchorItem, OButton } from '@opensig/opendesign'
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 
-import '@opensig/opendesign-token/themes/a.light.token.css'
-import '@opensig/opendesign-token/themes/a.dark.token.css'
 
 const anchorItems = [
   { id: 'floor-menu', title: 'Menu 菜单' },
@@ -57,7 +54,6 @@ const anchorItems = [
   { id: 'floor-switch', title: 'Switch 开关' },
   { id: 'floor-scrollbar', title: 'Scrollbar 滚动条' },
   { id: 'floor-toggle', title: 'Toggle 切换' },
-  { id: 'floor-float-button', title: 'FloatButton 悬浮按钮' },
   { id: 'floor-input', title: 'Input 输入框' },
   { id: 'floor-textarea', title: 'Textarea 文本域' },
   { id: 'floor-select', title: 'Select 选择器' },
@@ -93,7 +89,7 @@ const originalTheme = ref('')
 
 onMounted(() => {
   originalTheme.value = document.documentElement.getAttribute('data-o-theme') || 'e.light'
-  document.documentElement.setAttribute('data-o-theme', 'a.light')
+  document.documentElement.setAttribute('data-o-theme', 'e.light')
 
   nextTick(() => {
     const hash = window.location.hash.slice(1)
@@ -128,7 +124,6 @@ onUnmounted(() => {
       <div id="floor-switch"><FloorSwitch /></div>
       <div id="floor-scrollbar"><FloorScrollbar /></div>
       <div id="floor-toggle"><FloorToggle /></div>
-      <div id="floor-float-button"><FloorFloatButton /></div>
       <div id="floor-input"><FloorInput /></div>
       <div id="floor-textarea"><FloorTextarea /></div>
       <div id="floor-select"><FloorSelect /></div>
@@ -180,7 +175,13 @@ onUnmounted(() => {
         </OButton>
       </div>
       <div v-if="!collapsed" class="anchor-body">
-        <OAnchor layout="v" size="small" :target-offset="20" class="right-anchor-list">
+        <OAnchor
+          layout="v"
+          size="small"
+          :target-offset="20"
+          container="window"
+          class="right-anchor-list"
+        >
           <OAnchorItem
             v-for="item in anchorItems"
             :key="item.id"

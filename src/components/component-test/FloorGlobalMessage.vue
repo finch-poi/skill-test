@@ -38,19 +38,19 @@ function showLoading() {
       <div class="theme-section" data-testid="global-msg-row-light">
         <div class="theme-label">Light</div>
         <div class="msg-list">
-          <OMessage status="success" closable :default-visible="true">
+          <OMessage status="success" closable :default-visible="true" :duration="5000">
             用于表示操作顺利达成，5秒后消失
           </OMessage>
-          <OMessage status="info" closable :default-visible="true">
+          <OMessage status="info" closable :default-visible="true" :duration="5000">
             用于表示普通操作信息提示，5秒后消失
           </OMessage>
-          <OMessage status="danger" closable :default-visible="true">
+          <OMessage status="danger" closable :default-visible="true" :duration="10000">
             用于表示操作引起严重的后果，10秒后消失
           </OMessage>
-          <OMessage status="warning" closable :default-visible="true">
+          <OMessage status="warning" closable :default-visible="true" :duration="10000">
             用于表示操作引起一定后果，10秒后消失
           </OMessage>
-          <OMessage status="loading" closable :default-visible="true">
+          <OMessage status="loading" closable :default-visible="true" :duration="5000">
             用于表示操作正在生效的过程中，5秒后消失
           </OMessage>
         </div>

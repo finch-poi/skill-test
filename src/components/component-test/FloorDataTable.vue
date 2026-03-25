@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // 设计稿 ID：293:12921（Pixso item-id，数据表格）
-import { ref, h } from 'vue'
-import { ODataTable, OButton, OInput } from '@opensig/opendesign'
-import type { DataTableColumnT, DataTableSpanMethod } from '@opensig/opendesign'
+import { ref, h, computed } from 'vue'
+import { ODataTable, OButton, OInput, DataTableSortMethod } from '@opensig/opendesign'
+import type { DataTableColumnT, DataTableSpanMethod, DataTableSortMethodT } from '@opensig/opendesign'
 import AppSection from '@/components/AppSection.vue'
 
 // ---- 公共数据 ----
@@ -24,6 +24,28 @@ const tableData = ref<TableRow[]>([
   { id: 4, name: '内容文本内容文本内容文本内容文本', num1: 330, num2: 330, text: '内容文本', link1: '文字链接', link2: '文字链接' },
   { id: 5, name: '内容文本内容文本内容文本内容文本', num1: 330, num2: 330, text: '内容文本', link1: '文字链接', link2: '文字链接' },
 ])
+
+// ---- 基础表格筛选/排序条件（前端数据模拟）----
+const conditions = ref<{
+  num1: number[]
+  num2Sort?: DataTableSortMethodT
+}>({
+  num1: [],
+  num2Sort: DataTableSortMethod.NA,
+})
+
+const filteredData = computed(() => {
+  let res = [...tableData.value]
+  if (conditions.value.num1?.length) {
+    res = res.filter(row => (conditions.value.num1 as number[]).includes(row.num1))
+  }
+  if (conditions.value.num2Sort === DataTableSortMethod.ASC) {
+    res = [...res].sort((a, b) => a.num2 - b.num2)
+  } else if (conditions.value.num2Sort === DataTableSortMethod.DESC) {
+    res = [...res].sort((a, b) => b.num2 - a.num2)
+  }
+  return res
+})
 
 // ---- 基础表格（M size）列配置 ----
 const basicColumnsM: DataTableColumnT[] = [
@@ -59,7 +81,7 @@ const selectedKeysBatchM = ref<(string | number)[]>([])
 const batchColumnsM: DataTableColumnT[] = [
   { key: 'name', label: '标题 1', minWidth: 160, showOverflowToolTip: 1 },
   { key: 'num1', label: '标题 2', width: 100 },
-  { key: 'num2', label: '标题 3', width: 100, sortKey: 'num2Sort' },
+  { key: 'num2', label: '标题 3', width: 100 },
   { key: 'text', label: '标题 4', width: 100 },
   {
     key: 'link1', label: '标题 5', width: 100,
@@ -96,9 +118,33 @@ const editableData = ref<EditableRow[]>([
 
 const editableColumnsM: DataTableColumnT[] = [
   { key: 'name', label: '标题 1', minWidth: 160, showOverflowToolTip: 1 },
-  { key: 'num1', label: '标题 2', width: 120 },
-  { key: 'num2', label: '标题 3', width: 120 },
-  { key: 'text', label: '标题 4', width: 120 },
+  {
+    key: 'num1', label: '标题 2', width: 120,
+    formatter: ({ row }) => () => h(OInput, {
+      modelValue: (row as EditableRow).num1,
+      'onUpdate:modelValue': (v: string | number) => { (row as EditableRow).num1 = Number(v) },
+      size: 'small',
+      style: { width: '90px' },
+    }),
+  },
+  {
+    key: 'num2', label: '标题 3', width: 120,
+    formatter: ({ row }) => () => h(OInput, {
+      modelValue: (row as EditableRow).num2,
+      'onUpdate:modelValue': (v: string | number) => { (row as EditableRow).num2 = Number(v) },
+      size: 'small',
+      style: { width: '90px' },
+    }),
+  },
+  {
+    key: 'text', label: '标题 4', width: 120,
+    formatter: ({ row }) => () => h(OInput, {
+      modelValue: (row as EditableRow).text,
+      'onUpdate:modelValue': (v: string | number) => { (row as EditableRow).text = String(v) },
+      size: 'small',
+      style: { width: '90px' },
+    }),
+  },
   {
     key: 'action', label: '操作', width: 80,
     formatter: () => h('span', { style: { color: 'var(--o-color-danger1)', cursor: 'pointer' } }, '删除'),
@@ -165,7 +211,8 @@ const spanMethod: DataTableSpanMethod = ({ rowIndex, colIndex }) => {
           <ODataTable
             data-testid="data-table-basic-m"
             :columns="basicColumnsM"
-            :data="tableData"
+            :data="filteredData"
+            v-model:conditions="conditions"
             border="row-frame"
             highlight-current-row
           />
@@ -177,7 +224,8 @@ const spanMethod: DataTableSpanMethod = ({ rowIndex, colIndex }) => {
           <ODataTable
             data-testid="data-table-basic-s"
             :columns="basicColumnsS"
-            :data="tableData"
+            :data="filteredData"
+            v-model:conditions="conditions"
             size="small"
             border="row-frame"
             highlight-current-row
@@ -213,7 +261,7 @@ const spanMethod: DataTableSpanMethod = ({ rowIndex, colIndex }) => {
           />
         </div>
 
-        <!-- M size 可编辑表格（使用 td_ 插槽自定义单元格）-->
+        <!-- M size 可编辑表格（使用 formatter 返回函数式组件）-->
         <div class="table-card">
           <div class="table-label">M size · 可编辑表格（input 插槽）</div>
           <ODataTable
@@ -222,17 +270,7 @@ const spanMethod: DataTableSpanMethod = ({ rowIndex, colIndex }) => {
             :data="editableData"
             border="row-frame"
             highlight-current-row
-          >
-            <template #td_num1="{ row }">
-              <OInput v-model="(row as unknown as EditableRow).num1" size="small" style="width: 90px" />
-            </template>
-            <template #td_num2="{ row }">
-              <OInput v-model="(row as unknown as EditableRow).num2" size="small" style="width: 90px" />
-            </template>
-            <template #td_text="{ row }">
-              <OInput v-model="(row as unknown as EditableRow).text" size="small" style="width: 90px" />
-            </template>
-          </ODataTable>
+          />
         </div>
 
         <!-- M size 行列合并表格 -->
@@ -260,7 +298,8 @@ const spanMethod: DataTableSpanMethod = ({ rowIndex, colIndex }) => {
           <ODataTable
             data-testid="data-table-basic-m-dark"
             :columns="basicColumnsM"
-            :data="tableData"
+            :data="filteredData"
+            v-model:conditions="conditions"
             border="row-frame"
             highlight-current-row
           />
@@ -272,7 +311,8 @@ const spanMethod: DataTableSpanMethod = ({ rowIndex, colIndex }) => {
           <ODataTable
             data-testid="data-table-basic-s-dark"
             :columns="basicColumnsS"
-            :data="tableData"
+            :data="filteredData"
+            v-model:conditions="conditions"
             size="small"
             border="row-frame"
             highlight-current-row
@@ -315,17 +355,7 @@ const spanMethod: DataTableSpanMethod = ({ rowIndex, colIndex }) => {
             :data="editableData"
             border="row-frame"
             highlight-current-row
-          >
-            <template #td_num1="{ row }">
-              <OInput v-model="(row as unknown as EditableRow).num1" size="small" style="width: 90px" />
-            </template>
-            <template #td_num2="{ row }">
-              <OInput v-model="(row as unknown as EditableRow).num2" size="small" style="width: 90px" />
-            </template>
-            <template #td_text="{ row }">
-              <OInput v-model="(row as unknown as EditableRow).text" size="small" style="width: 90px" />
-            </template>
-          </ODataTable>
+          />
         </div>
 
         <!-- M size 行列合并表格 Dark -->

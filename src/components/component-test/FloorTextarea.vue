@@ -1,11 +1,28 @@
 <script setup lang="ts">
 // 设计稿 ID：17:2670（Pixso item-id，文本域）
-import { ref } from 'vue'
-import { OTextarea } from '@opensig/opendesign'
+import { ref, reactive, onMounted, nextTick } from 'vue'
+import { OTextarea, OForm, OFormItem } from '@opensig/opendesign'
 import AppSection from '@/components/AppSection.vue'
 
 const valueEmpty = ref('')
 const valueContent = ref('已输入的文字内容')
+
+// ---- 错误状态 demo（OForm + OFormItem 驱动，不直接用 color="danger"）----
+const errorRules = [{ required: true, message: '错误提示' }]
+const errorModel = reactive({ val: '' })
+
+const errorFormLightOutlineRef = ref()
+const errorFormLightSolidRef = ref()
+const errorFormDarkOutlineRef = ref()
+const errorFormDarkSolidRef = ref()
+
+onMounted(async () => {
+  await nextTick()
+  errorFormLightOutlineRef.value?.validate()
+  errorFormLightSolidRef.value?.validate()
+  errorFormDarkOutlineRef.value?.validate()
+  errorFormDarkSolidRef.value?.validate()
+})
 </script>
 
 <template>
@@ -78,32 +95,36 @@ const valueContent = ref('已输入的文字内容')
           <!-- Error（danger） -->
           <div class="textarea-cell">
             <div class="cell-label">Error</div>
-            <OTextarea
-              v-model="valueEmpty"
-              placeholder="Hint"
-              :max-length="100"
-              show-length="always"
-              color="danger"
-              resize="none"
-              data-testid="textarea-error-light"
-            />
-            <div class="error-text">错误提示</div>
+            <OForm ref="errorFormLightOutlineRef" :model="errorModel" class="demo-form">
+              <OFormItem field="val" :rules="errorRules">
+                <OTextarea
+                  v-model="errorModel.val"
+                  placeholder="Hint"
+                  :max-length="100"
+                  show-length="always"
+                  resize="none"
+                  data-testid="textarea-error-light"
+                />
+              </OFormItem>
+            </OForm>
           </div>
 
           <!-- Error · Solid -->
           <div class="textarea-cell">
             <div class="cell-label">Error · Solid</div>
-            <OTextarea
-              v-model="valueEmpty"
-              placeholder="Hint"
-              :max-length="100"
-              show-length="always"
-              color="danger"
-              variant="solid"
-              resize="none"
-              data-testid="textarea-error-solid-light"
-            />
-            <div class="error-text">错误提示</div>
+            <OForm ref="errorFormLightSolidRef" :model="errorModel" class="demo-form">
+              <OFormItem field="val" :rules="errorRules">
+                <OTextarea
+                  v-model="errorModel.val"
+                  placeholder="Hint"
+                  :max-length="100"
+                  show-length="always"
+                  variant="solid"
+                  resize="none"
+                  data-testid="textarea-error-solid-light"
+                />
+              </OFormItem>
+            </OForm>
           </div>
 
         </div>
@@ -172,32 +193,36 @@ const valueContent = ref('已输入的文字内容')
           <!-- Error -->
           <div class="textarea-cell">
             <div class="cell-label">Error</div>
-            <OTextarea
-              v-model="valueEmpty"
-              placeholder="Hint"
-              :max-length="100"
-              show-length="always"
-              color="danger"
-              resize="none"
-              data-testid="textarea-error-dark"
-            />
-            <div class="error-text">错误提示</div>
+            <OForm ref="errorFormDarkOutlineRef" :model="errorModel" class="demo-form">
+              <OFormItem field="val" :rules="errorRules">
+                <OTextarea
+                  v-model="errorModel.val"
+                  placeholder="Hint"
+                  :max-length="100"
+                  show-length="always"
+                  resize="none"
+                  data-testid="textarea-error-dark"
+                />
+              </OFormItem>
+            </OForm>
           </div>
 
           <!-- Error · Solid -->
           <div class="textarea-cell">
             <div class="cell-label">Error · Solid</div>
-            <OTextarea
-              v-model="valueEmpty"
-              placeholder="Hint"
-              :max-length="100"
-              show-length="always"
-              color="danger"
-              variant="solid"
-              resize="none"
-              data-testid="textarea-error-solid-dark"
-            />
-            <div class="error-text">错误提示</div>
+            <OForm ref="errorFormDarkSolidRef" :model="errorModel" class="demo-form">
+              <OFormItem field="val" :rules="errorRules">
+                <OTextarea
+                  v-model="errorModel.val"
+                  placeholder="Hint"
+                  :max-length="100"
+                  show-length="always"
+                  variant="solid"
+                  resize="none"
+                  data-testid="textarea-error-solid-dark"
+                />
+              </OFormItem>
+            </OForm>
           </div>
 
         </div>
@@ -261,8 +286,10 @@ const valueContent = ref('已输入的文字内容')
   color: var(--o-color-info3);
 }
 
-.error-text {
-  @include tip1;
-  color: var(--o-color-danger1);
+// ---- 表单 demo 重置（移除 OFormItem 默认外边距）----
+.demo-form {
+  :deep(.o-form-item) {
+    margin-bottom: 0;
+  }
 }
 </style>

@@ -3,6 +3,21 @@ import { gotoPage } from './setup'
 
 // 设计稿 ID：114:3012, 114:3005, 16:4646（标签 FloorTag）
 // 视口宽度 1920px（>1680 widescreen 断点）
+//
+// ===== 关键视觉值（来自 DSL + 组件 CSS token） =====
+// 高度：large=24px(>1680px) / medium=20px / small=16px
+//   token: --o-control_size-s=24px / fixed 20px / --o-control_size-xs=16px
+// 字号：--o-font_size-tip2 = 12px（L/M/S label 均相同；S 有 transform scale(0.833) 缩放，视觉≈10px）
+// 行高：--o-line_height-tip2 = 18px
+// 圆角（默认）：--o-radius_control-xs = 4px
+// 圆角（pill）：--o-control_size-l = 40px
+// success bg：rgb(11, 177, 81)   token: --o-color-success1 = rgb(var(--o-green-6))
+// primary bg：rgb(0, 47, 167)    token: --o-color-primary1 = rgb(var(--o-brand-6))
+// danger  bg：rgb(230, 0, 18)    token: --o-color-danger1  = rgb(var(--o-red-6))
+// warning bg：rgb(250, 115, 5)   token: --o-color-warning1 = rgb(var(--o-orange-6))
+// normal  bg：rgb(235, 241, 250)  token: --o-color-control2-light = rgb(var(--o-brand-1))
+// normal text：rgb(0, 0, 0)       token: --o-color-info1 = rgba(var(--o-grey-14),1)
+// 运营单色 bg：rgb(199, 0, 11) [Ascend 品牌红]  text: rgb(255, 255, 255)
 
 test.describe('FloorTag · 结构与组件正确性', () => {
   test('light 和 dark 主题区块都存在', async ({ page }) => {
@@ -90,21 +105,23 @@ test.describe('FloorTag · 默认状态与颜色正确性', () => {
     })
     // pill: 100px or 50% or similar large value
     expect(borderRadius).toBeTruthy()
-    // verify it's a round shape — computed value should not be 4px (--o-radius-m)
+    // verify it's a round shape — computed value should not be 4px (--o-radius_control-xs)
     expect(borderRadius).not.toBe('4px')
   })
 })
 
 test.describe('FloorTag · 尺寸正确性', () => {
-  test('L 标签高度为 28px（>1440px 断点）', async ({ page }) => {
+  // DSL: 114:3012 L=24px, M=20px, S=16px
+  // token: --o-control_size-s=24px(>1680px), medium固定20px, --o-control_size-xs=16px
+  test('L 标签高度为 24px（>1680px 断点）', async ({ page }) => {
     await gotoPage(page)
     const lTag = page.locator('[data-testid="tag-status-light-l"] .o-tag').first()
     await expect(lTag).toBeVisible()
     const height = await lTag.evaluate((el) => {
       return Math.round(el.getBoundingClientRect().height)
     })
-    // At 1920px viewport, large = 28px
-    expect(height).toBe(28)
+    // At 1920px viewport (>1680px): --o-control_size-s = 24px
+    expect(height).toBe(24)
   })
 
   test('M 标签高度为 20px', async ({ page }) => {
@@ -124,6 +141,7 @@ test.describe('FloorTag · 尺寸正确性', () => {
     const height = await sTag.evaluate((el) => {
       return Math.round(el.getBoundingClientRect().height)
     })
+    // --o-control_size-xs = 16px
     expect(height).toBe(16)
   })
 
@@ -131,6 +149,22 @@ test.describe('FloorTag · 尺寸正确性', () => {
     await gotoPage(page)
     const opRow = page.locator('[data-testid="tag-op-solid-light"]')
     await expect(opRow.locator('.o-tag')).toHaveCount(3)
+  })
+
+  test('运营标签 L / M / S 高度分别为 24 / 20 / 16px', async ({ page }) => {
+    await gotoPage(page)
+    // L
+    const lTag = page.locator('[data-testid="tag-op-solid-light"] .o-tag').nth(0)
+    const mTag = page.locator('[data-testid="tag-op-solid-light"] .o-tag').nth(1)
+    const sTag = page.locator('[data-testid="tag-op-solid-light"] .o-tag').nth(2)
+    await expect(lTag).toBeVisible()
+    const lH = await lTag.evaluate((el) => Math.round(el.getBoundingClientRect().height))
+    const mH = await mTag.evaluate((el) => Math.round(el.getBoundingClientRect().height))
+    const sH = await sTag.evaluate((el) => Math.round(el.getBoundingClientRect().height))
+    // DSL: 16:4646 L=24, M=20, S=16；与状态标签相同 size class
+    expect(lH).toBe(24)
+    expect(mH).toBe(20)
+    expect(sH).toBe(16)
   })
 })
 
@@ -153,16 +187,190 @@ test.describe('FloorTag · 布局与间距', () => {
   })
 })
 
+test.describe('FloorTag · 视觉样式（字号/颜色/圆角/行高/边框）', () => {
+  // --- 字号 & 行高 ---
+  test('L/M 标签 label 字号 12px、行高 18px', async ({ page }) => {
+    await gotoPage(page)
+    const lLabel = page.locator('[data-testid="tag-status-light-l"] .o-tag .o-tag-label').first()
+    const mLabel = page.locator('[data-testid="tag-status-light-m"] .o-tag .o-tag-label').first()
+    await expect(lLabel).toBeVisible()
+    const lFs = await lLabel.evaluate((el) => window.getComputedStyle(el).fontSize)
+    const lLh = await lLabel.evaluate((el) => window.getComputedStyle(el).lineHeight)
+    const mFs = await mLabel.evaluate((el) => window.getComputedStyle(el).fontSize)
+    // DSL: 114:3012 fontSize=12, lineHeight=18; token: --o-font_size-tip2=12px, --o-line_height-tip2=18px
+    expect(lFs).toBe('12px')
+    expect(lLh).toBe('18px')
+    expect(mFs).toBe('12px')
+  })
+
+  test('S 标签 label CSS font-size 12px（视觉上因 scale(0.833) 约 10px）', async ({ page }) => {
+    await gotoPage(page)
+    const sLabel = page.locator('[data-testid="tag-status-light-s"] .o-tag .o-tag-label').first()
+    await expect(sLabel).toBeVisible()
+    const fs = await sLabel.evaluate((el) => window.getComputedStyle(el).fontSize)
+    // CSS 声明的 font-size 仍为 12px；视觉缩小依赖 transform: scale(0.833334)
+    expect(fs).toBe('12px')
+  })
+
+  // --- 背景色（status 标签，light 模式）---
+  test('success 标签背景色 rgb(11,177,81)，文字白色', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-status-light-l"] .o-tag-success').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const color = await tag.evaluate((el) => window.getComputedStyle(el).color)
+    // DSL: rgba(11,177,81,1)；token: --o-color-success1 = rgb(var(--o-green-6))
+    expect(bg).toBe('rgb(11, 177, 81)')
+    expect(color).toBe('rgb(255, 255, 255)')
+  })
+
+  test('primary 标签背景色 rgb(0,47,167)，文字白色', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-status-light-l"] .o-tag-primary').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const color = await tag.evaluate((el) => window.getComputedStyle(el).color)
+    // token: --o-color-primary1 = rgb(var(--o-brand-6)) = rgb(0, 47, 167)
+    expect(bg).toBe('rgb(0, 47, 167)')
+    expect(color).toBe('rgb(255, 255, 255)')
+  })
+
+  test('danger 标签背景色 rgb(230,0,18)，文字白色', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-status-light-l"] .o-tag-danger').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const color = await tag.evaluate((el) => window.getComputedStyle(el).color)
+    // DSL: rgba(230,0,18,1)；token: --o-color-danger1 = rgb(var(--o-red-6))
+    expect(bg).toBe('rgb(230, 0, 18)')
+    expect(color).toBe('rgb(255, 255, 255)')
+  })
+
+  test('warning 标签背景色 rgb(250,115,5)，文字白色', async ({ page }) => {
+    await gotoPage(page)
+    const lRow = page.locator('[data-testid="tag-status-light-l"]')
+    const tag = lRow.locator('.o-tag-warning').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const color = await tag.evaluate((el) => window.getComputedStyle(el).color)
+    // token: --o-color-warning1 = rgb(var(--o-orange-6)) = rgb(250, 115, 5)
+    expect(bg).toBe('rgb(250, 115, 5)')
+    expect(color).toBe('rgb(255, 255, 255)')
+  })
+
+  test('normal 标签背景色 rgb(235,241,250)（openEuler brand-1），文字黑色', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-status-light-l"] .o-tag-normal').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const color = await tag.evaluate((el) => window.getComputedStyle(el).color)
+    // token: --o-color-control2-light = rgb(var(--o-brand-1)) = rgb(235, 241, 250)
+    // token: --o-color-info1 = rgba(var(--o-grey-14),1) = rgb(0, 0, 0)
+    expect(bg).toBe('rgb(235, 241, 250)')
+    expect(color).toBe('rgb(0, 0, 0)')
+  })
+
+  // --- 圆角 ---
+  test('状态标签默认圆角 4px（非 pill）', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-status-light-l"] .o-tag').first()
+    await expect(tag).toBeVisible()
+    const radius = await tag.evaluate((el) => window.getComputedStyle(el).borderRadius)
+    // token: --o-radius_control-xs = 4px
+    expect(radius).toBe('4px')
+  })
+
+  test('运营标签 pill 圆角完全圆（100vh=1080px）', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-op-solid-light"] .o-tag').first()
+    await expect(tag).toBeVisible()
+    const radius = await tag.evaluate((el) => window.getComputedStyle(el).borderRadius)
+    // OTag 组件通过 style-class.mjs 以内联样式注入 --tag-radius: 100vh
+    // 100vh @ 1920×1080 = 1080px，视觉上完全圆形胶囊
+    expect(radius).toBe('1080px')
+  })
+
+  // --- outline 描边样式 ---
+  test('primary outline 标签背景透明、边框色 rgb(0,47,167)', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-info-outline-light"] .o-tag-outline.o-tag-primary').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const borderColor = await tag.evaluate((el) => window.getComputedStyle(el).borderTopColor)
+    // .o-tag-primary.o-tag-outline: bg=transparent, border-color=--o-color-primary1=rgb(0,47,167)
+    expect(bg).toBe('rgba(0, 0, 0, 0)')
+    expect(borderColor).toBe('rgb(0, 47, 167)')
+  })
+
+  test('success outline 标签边框色 rgb(11,177,81)', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-info-outline-light"] .o-tag-outline.o-tag-success').first()
+    await expect(tag).toBeVisible()
+    const borderColor = await tag.evaluate((el) => window.getComputedStyle(el).borderTopColor)
+    // token: --o-color-success1 = rgb(11, 177, 81)
+    expect(borderColor).toBe('rgb(11, 177, 81)')
+  })
+
+  // --- 运营标签颜色 ---
+  test('运营单色标签背景 rgb(199,0,11) [Ascend 品牌红]，文字白色', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-op-solid-light"] .o-tag').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const color = await tag.evaluate((el) => window.getComputedStyle(el).color)
+    // DSL: 16:4646 单色 fill = rgba(199,0,11,1)；code: --tag-bg-color: rgb(199,0,11)
+    expect(bg).toBe('rgb(199, 0, 11)')
+    expect(color).toBe('rgb(255, 255, 255)')
+  })
+
+  test('运营渐变色标签背景为蓝紫渐变（light 模式 0.15 opacity）', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-op-gradient-light"] .o-tag').first()
+    await expect(tag).toBeVisible()
+    const bgImage = await tag.evaluate((el) => window.getComputedStyle(el).backgroundImage)
+    const bgColor = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    const borderColor = await tag.evaluate((el) => window.getComputedStyle(el).borderTopColor)
+    // DSL: 16:4646 渐变色 Dark=off stops rgba(46,83,250,0.15) → rgba(123,37,244,0.15)
+    expect(bgImage).toBe('linear-gradient(to right, rgba(46, 83, 250, 0.15), rgba(123, 37, 244, 0.15))')
+    expect(bgColor).toBe('rgba(0, 0, 0, 0)') // 背景色为 transparent（渐变通过 background-image 实现）
+    expect(borderColor).toBe('rgba(0, 0, 0, 0)') // 无边框
+  })
+
+  test('运营自定颜色标签背景为半透明蓝 rgba(46,83,250,0.15)', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-op-custom-light"] .o-tag').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    // DSL: 16:4646 自定颜色 Dark=off fill = rgba(46,83,250,0.15)；code: --tag-bg-color: rgba(46,83,250,0.15)
+    expect(bg).toBe('rgba(46, 83, 250, 0.15)')
+  })
+
+  // --- 带图标标签 ---
+  test('带图标标签图标区域存在且与文字间距正常', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-info-icon-light"] .o-tag').first()
+    await expect(tag).toBeVisible()
+    const icon = tag.locator('.o-tag-icon')
+    await expect(icon).toBeVisible()
+    // icon 字号 = --o-icon_size_control-xs（通过 .o-tag-large 的 --tag-icon-size 设置）
+    const iconFs = await icon.evaluate((el) => window.getComputedStyle(el).fontSize)
+    expect(iconFs).toBeTruthy()
+  })
+})
+
 test.describe('FloorTag · 交互行为', () => {
   test('可关闭标签点击关闭后消失', async ({ page }) => {
     await gotoPage(page)
     const closableRow = page.locator('[data-testid="tag-info-closable-light"]')
+    const allTags = closableRow.locator('.o-tag')
     const firstCloseBtn = closableRow.locator('.o-tag-close').first()
     await expect(firstCloseBtn).toBeVisible()
+    // 点击前有 4 个可见标签
+    await expect(allTags.filter({ visible: true })).toHaveCount(4)
     // Click close
     await firstCloseBtn.click()
-    // Tag should no longer be visible
-    await expect(closableRow.locator('.o-tag').first()).not.toBeVisible()
+    // 点击后可见标签减少为 3 个
+    await expect(allTags.filter({ visible: true })).toHaveCount(3)
   })
 })
 
@@ -201,5 +409,23 @@ test.describe('FloorTag · dark 主题下 OTag 颜色正确渲染', () => {
     await expect(page.locator('[data-testid="tag-op-solid-dark"]')).toBeVisible()
     await expect(page.locator('[data-testid="tag-op-gradient-dark"]')).toBeVisible()
     await expect(page.locator('[data-testid="tag-op-custom-dark"]')).toBeVisible()
+  })
+
+  test('dark 模式 success 标签背景比 light 模式更亮 rgb(51,193,104)', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-status-dark-l"] .o-tag-success').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    // DSL: 114:3012 success Dark=on fill = rgba(51,193,104,1)
+    expect(bg).toBe('rgb(51, 193, 104)')
+  })
+
+  test('dark 模式 danger 标签背景 rgb(235,35,45)', async ({ page }) => {
+    await gotoPage(page)
+    const tag = page.locator('[data-testid="tag-status-dark-l"] .o-tag-danger').first()
+    await expect(tag).toBeVisible()
+    const bg = await tag.evaluate((el) => window.getComputedStyle(el).backgroundColor)
+    // DSL: 114:3012 danger Dark=on fill = rgba(235,35,45,1)
+    expect(bg).toBe('rgb(235, 35, 45)')
   })
 })
